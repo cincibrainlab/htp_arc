@@ -1,0 +1,318 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Initialize Environment</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-01"><meta name="DC.source" content="init_environment.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Initialize Environment</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">init_environment</a></li><li><a href="#5">base_configEnvironment</a></li><li><a href="#6">pluginErrMsg</a></li></ul></div><h2 id="1">Usage</h2><p>obj = init_environment( obj )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><p>The input is the htpPreprocessMaster object if the function is not self-invoked.  The output, if the function is not self-invoked, is the htpPreprocessMaster object that was passed in with the preprocessing enviornment updated with various information (user selection options, channel location info, and eeglab plugin paths) to guide the preprocessing steps throughout the entire process.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright &copy; 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">init_environment</h2><p>Set the user defined options for the preprocessing gui options from various XMLs.  Along with those gui-based options, further XML-defined options for powerbands, electrode configuration, channel information, etc. are set to allow the preprocessing the ability to correctly proceed.</p><p>On top of initiation of accurate preprocessing options, the excessive warning messages that do not correspond to warnings that the user should worry about are turned off to keep the console clean and easily readable.</p><p>All EEGLAB plugins that are possibly utilized during preprocessing are checked to ensure their existence on the MATLAB path, so that they can be reached at the appropriate time during preprocessing and if not then alert the user to ensure that EEGLAB is installed and added to the MATLAB path so the preprocessing experience can be smooth and accurate.</p><pre class="codeinput"><span class="keyword">function</span> obj = init_environment( obj )
+
+obj.msgout(<span class="string">'Initializing Configuration ...'</span>);
+
+obj.xmlfile_options = <span class="string">'config/cfg_htpPreprocessingOptions.xml'</span>;
+obj.xmlfile_elec    = <span class="string">'config/cfg_htpEegSystems.xml'</span>;
+obj.xmlfile_presets =  <span class="string">'config/cfg_htpPresets.xml'</span>;
+obj.xmlfile_exclude =  <span class="string">'config/cfg_exclude.xml'</span>;
+obj.xmlfile_power = <span class="string">'config/cfg_htpAnalysisPowerBands.xml'</span>;
+
+obj.import_options( obj.xmlfile_options );
+obj.import_elec( obj.xmlfile_elec );
+obj.import_presets( obj.xmlfile_presets );
+obj.import_exclude( obj.xmlfile_exclude );
+obj.import_powerbands( obj.xmlfile_power );
+
+htpcfg = obj.htpcfg;
+
+base_configEnvironment;
+
+
+obj.msgout(sprintf(<span class="string">'Electrode Configurations: Loaded.'</span>), <span class="string">'step_complete'</span>);
+htpcfg.chaninfo = obj.xml_elec;
+
+
+obj.msgout(sprintf(<span class="string">'Available Options from %s: Loaded.\n'</span>, obj.xmlfile_options ), <span class="string">'step_complete'</span>);
+
+<span class="comment">% htpcfg.opt.lowcutoff    = obj.xml_opt.Stage1.FilterLow;</span>
+<span class="comment">% htpcfg.opt.highcutoff   = obj.xml_opt.Stage1.FilterHigh;</span>
+<span class="comment">% htpcfg.opt.notch        = obj.xml_opt.Stage1.Notch1; %{'57 63 3330'};</span>
+<span class="comment">% htpcfg.opt.resample     = obj.xml_opt.Stage1.Resample;</span>
+<span class="comment">% htpcfg.opt.epochlength  = obj.xml_opt.Stage2.EpochLength;</span>
+<span class="comment">% htpcfg.opt.cleanmode    = obj.xml_opt.Stage2.CleanMode;</span>
+<span class="comment">% htpcfg.opt.pcacomps     = obj.xml_opt.Stage3.PCA;</span>
+<span class="comment">% htpcfg.opt.brainonly    = obj.xml_opt.Stage3.CompSelect;</span>
+<span class="comment">% htpcfg.opt.plots        = {'Off', 'Minimal', 'Maximum'};</span>
+<span class="comment">% htpcfg.opt.parforS1     = obj.xml_opt.Stage1.ParforS1;</span>
+
+
+<span class="keyword">try</span>
+
+    htpcfg.hdmfile = fullfile(htpcfg.eeglabpath, <span class="string">'\plugins\dipfit2.3\standard_BEM\standard_vol_SCCN.mat'</span>);
+    htpcfg.mrifile = fullfile(htpcfg.eeglabpath, <span class="string">'\plugins\dipfit2.3\standard_BEM\standard_mri.mat'</span>);
+
+    htpcfg.eegpluginspath = fullfile([htpcfg.eeglabpath <span class="string">'plugins'</span>]);
+    htpcfg.plugerr = 0;
+
+
+
+    <span class="keyword">if</span> obj.checkEegPlugin(<span class="string">'iclabel'</span>, htpcfg.eegpluginspath), <span class="keyword">else</span>,    htpcfg.plugerr = 1; pluginErrMsg(<span class="string">'ICLabel'</span>); <span class="keyword">end</span>
+    <span class="keyword">if</span> obj.checkEegPlugin(<span class="string">'dipfit'</span>, htpcfg.eegpluginspath), <span class="keyword">else</span>,     htpcfg.plugerr = 1; pluginErrMsg(<span class="string">'dipfit2.0'</span>); <span class="keyword">end</span>
+    <span class="keyword">if</span> obj.checkEegPlugin(<span class="string">'viewprops'</span>, htpcfg.eegpluginspath), <span class="keyword">else</span>,  htpcfg.plugerr = 1; pluginErrMsg(<span class="string">'ViewProps'</span>); <span class="keyword">end</span>
+    <span class="keyword">if</span> obj.checkEegPlugin(<span class="string">'fieldtrip'</span>, htpcfg.eegpluginspath), <span class="keyword">else</span>,  htpcfg.plugerr = 1; pluginErrMsg(<span class="string">'FieldTrip-lite'</span>); <span class="keyword">end</span>
+    <span class="keyword">if</span> obj.checkEegPlugin(<span class="string">'firfilt'</span>, htpcfg.eegpluginspath), <span class="keyword">else</span>,    htpcfg.plugerr = 1; pluginErrMsg(<span class="string">'FirFilt'</span>); <span class="keyword">end</span>
+    <span class="keyword">if</span> obj.checkEegPlugin(<span class="string">'biosig'</span>, htpcfg.eegpluginspath), <span class="keyword">else</span>,    htpcfg.plugerr = 1; pluginErrMsg(<span class="string">'Biosig'</span>); <span class="keyword">end</span>
+    <span class="keyword">if</span> obj.checkEegPlugin(<span class="string">'mass_univ'</span>, htpcfg.eegpluginspath), <span class="keyword">else</span>,    htpcfg.plugerr = 1; pluginErrMsg(<span class="string">'mass_univ'</span>); <span class="keyword">end</span>
+
+    <span class="keyword">if</span> exist(<span class="string">'ALLCOM'</span>, <span class="string">'var'</span>)
+
+    <span class="keyword">else</span>
+        obj.start_EegLab_If_Needed;
+
+    <span class="keyword">end</span>
+<span class="keyword">catch</span>
+
+    obj.msg = sprintf(<span class="string">'ERROR: Please set EEGLAB path in Matlab.'</span>);
+    notify( obj, <span class="string">'step_complete'</span>);
+
+<span class="keyword">end</span>
+
+
+obj.htpcfg = htpcfg;
+assignin(<span class="string">'base'</span>, <span class="string">'htpcfg'</span>, htpcfg);
+
+
+<span class="keyword">end</span>
+</pre><h2 id="5">base_configEnvironment</h2><p>Turn off excessive warnings so command console is not cluttered with said warnings</p><pre class="codeinput"><span class="keyword">function</span> result = base_configEnvironment()
+
+    fprintf(<span class="string">'\nExcessive Warnings Off\n'</span>);
+    evalin(<span class="string">'base'</span>, <span class="string">'warning( ''off'', ''MATLAB:MKDIR:DirectoryExists'');'</span>);
+    evalin(<span class="string">'base'</span>, <span class="string">'warning( ''off'', ''MATLAB:xlswrite:AddSheet'');'</span> ) ;
+    evalin(<span class="string">'base'</span>, <span class="string">'warning( ''off'', ''MATLAB:table:ModifiedAndSavedVarnames'');'</span>);
+    evalin(<span class="string">'base'</span>, <span class="string">'warning( ''off'', ''MATLAB:subscripting:noSubscriptsSpecified'');'</span>);
+    evalin(<span class="string">'base'</span>, <span class="string">'warning( ''off'', ''MATLAB:rmpath:DirNotFound'');'</span>);
+    evalin(<span class="string">'base'</span>, <span class="string">'warning( ''off'', ''MATLAB:printf:BadEscapeSequenceInFormat'');'</span>);
+
+
+    fprintf(<span class="string">'\nDisplay Units set to Pixels\n'</span>);
+    evalin(<span class="string">'base'</span>, <span class="string">'set(0,''units'',''pixels'');'</span>);
+
+    result = 1;
+<span class="keyword">end</span>
+</pre><h2 id="6">pluginErrMsg</h2><p>Need to alert user that EEGLAB plugin possibly utilized by pipeline is not installed on their system.</p><pre class="codeinput"><span class="keyword">function</span> pluginErrMsg( error_str )
+
+   obj.msgout(sprintf(<span class="string">'\nERROR: EEGLAB plugin "%s" is not installed. \n\n'</span>, error_str), <span class="string">'msg_warning'</span>);
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Initialize Environment
+%%% Usage
+% obj = init_environment( obj )
+%
+%%% Parameters
+%
+% * INPUTS: obj
+%
+% * OUTPUTS: obj
+%
+% The input is the htpPreprocessMaster object if the function is not
+% self-invoked.  The output, if the function is not self-invoked, is the 
+% htpPreprocessMaster object that was passed in with the preprocessing 
+% enviornment updated with various information (user selection options,
+% channel location info, and eeglab plugin paths) to guide the
+% preprocessing steps throughout the entire process.
+%
+%%% Copyright and Contact Information
+% Copyright © 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% init_environment
+% Set the user defined options for the preprocessing gui options from
+% various XMLs.  Along with those gui-based options, further XML-defined options for
+% powerbands, electrode configuration, channel information, etc. are set to
+% allow the preprocessing the ability to correctly proceed.  
+%
+% On top of initiation of accurate preprocessing options, the excessive warning 
+% messages that do not correspond to warnings that the user should worry 
+% about are turned off to keep the console clean and easily readable.
+%
+% All EEGLAB plugins that are possibly utilized during preprocessing are
+% checked to ensure their existence on the MATLAB path, so that they can be 
+% reached at the appropriate time during preprocessing and if not then alert the user to
+% ensure that EEGLAB is installed and added to the MATLAB path so the
+% preprocessing experience can be smooth and accurate.
+
+function obj = init_environment( obj )
+
+obj.msgout('Initializing Configuration ...');
+
+obj.xmlfile_options = 'config/cfg_htpPreprocessingOptions.xml';
+obj.xmlfile_elec    = 'config/cfg_htpEegSystems.xml';
+obj.xmlfile_presets =  'config/cfg_htpPresets.xml';
+obj.xmlfile_exclude =  'config/cfg_exclude.xml';
+obj.xmlfile_power = 'config/cfg_htpAnalysisPowerBands.xml';  
+
+obj.import_options( obj.xmlfile_options );
+obj.import_elec( obj.xmlfile_elec );
+obj.import_presets( obj.xmlfile_presets );
+obj.import_exclude( obj.xmlfile_exclude );
+obj.import_powerbands( obj.xmlfile_power );
+
+htpcfg = obj.htpcfg;
+
+base_configEnvironment;
+
+
+obj.msgout(sprintf('Electrode Configurations: Loaded.'), 'step_complete');
+htpcfg.chaninfo = obj.xml_elec;
+
+
+obj.msgout(sprintf('Available Options from %s: Loaded.\n', obj.xmlfile_options ), 'step_complete');
+
+% htpcfg.opt.lowcutoff    = obj.xml_opt.Stage1.FilterLow;
+% htpcfg.opt.highcutoff   = obj.xml_opt.Stage1.FilterHigh;
+% htpcfg.opt.notch        = obj.xml_opt.Stage1.Notch1; %{'57 63 3330'};
+% htpcfg.opt.resample     = obj.xml_opt.Stage1.Resample;
+% htpcfg.opt.epochlength  = obj.xml_opt.Stage2.EpochLength;
+% htpcfg.opt.cleanmode    = obj.xml_opt.Stage2.CleanMode;
+% htpcfg.opt.pcacomps     = obj.xml_opt.Stage3.PCA;
+% htpcfg.opt.brainonly    = obj.xml_opt.Stage3.CompSelect;
+% htpcfg.opt.plots        = {'Off', 'Minimal', 'Maximum'};
+% htpcfg.opt.parforS1     = obj.xml_opt.Stage1.ParforS1;
+
+
+try
+    
+    htpcfg.hdmfile = fullfile(htpcfg.eeglabpath, '\plugins\dipfit2.3\standard_BEM\standard_vol_SCCN.mat');
+    htpcfg.mrifile = fullfile(htpcfg.eeglabpath, '\plugins\dipfit2.3\standard_BEM\standard_mri.mat');
+    
+    htpcfg.eegpluginspath = fullfile([htpcfg.eeglabpath 'plugins']);
+    htpcfg.plugerr = 0;
+    
+    
+    
+    if obj.checkEegPlugin('iclabel', htpcfg.eegpluginspath), else,    htpcfg.plugerr = 1; pluginErrMsg('ICLabel'); end
+    if obj.checkEegPlugin('dipfit', htpcfg.eegpluginspath), else,     htpcfg.plugerr = 1; pluginErrMsg('dipfit2.0'); end
+    if obj.checkEegPlugin('viewprops', htpcfg.eegpluginspath), else,  htpcfg.plugerr = 1; pluginErrMsg('ViewProps'); end
+    if obj.checkEegPlugin('fieldtrip', htpcfg.eegpluginspath), else,  htpcfg.plugerr = 1; pluginErrMsg('FieldTrip-lite'); end
+    if obj.checkEegPlugin('firfilt', htpcfg.eegpluginspath), else,    htpcfg.plugerr = 1; pluginErrMsg('FirFilt'); end
+    if obj.checkEegPlugin('biosig', htpcfg.eegpluginspath), else,    htpcfg.plugerr = 1; pluginErrMsg('Biosig'); end
+    if obj.checkEegPlugin('mass_univ', htpcfg.eegpluginspath), else,    htpcfg.plugerr = 1; pluginErrMsg('mass_univ'); end
+        
+    if exist('ALLCOM', 'var')
+        
+    else
+        obj.start_EegLab_If_Needed;
+        
+    end
+catch
+    
+    obj.msg = sprintf('ERROR: Please set EEGLAB path in Matlab.');
+    notify( obj, 'step_complete');
+    
+end
+
+
+obj.htpcfg = htpcfg;
+assignin('base', 'htpcfg', htpcfg);
+
+
+end
+
+%% base_configEnvironment
+% Turn off excessive warnings so command console is not cluttered
+% with said warnings
+
+function result = base_configEnvironment()
+
+    fprintf('\nExcessive Warnings Off\n');
+    evalin('base', 'warning( ''off'', ''MATLAB:MKDIR:DirectoryExists'');');
+    evalin('base', 'warning( ''off'', ''MATLAB:xlswrite:AddSheet'');' ) ;
+    evalin('base', 'warning( ''off'', ''MATLAB:table:ModifiedAndSavedVarnames'');');
+    evalin('base', 'warning( ''off'', ''MATLAB:subscripting:noSubscriptsSpecified'');');
+    evalin('base', 'warning( ''off'', ''MATLAB:rmpath:DirNotFound'');');
+    evalin('base', 'warning( ''off'', ''MATLAB:printf:BadEscapeSequenceInFormat'');'); 
+
+
+    fprintf('\nDisplay Units set to Pixels\n');
+    evalin('base', 'set(0,''units'',''pixels'');');
+
+    result = 1;
+end
+
+%% pluginErrMsg
+% Need to alert user that EEGLAB plugin possibly utilized by
+% pipeline is not installed on their system.
+
+function pluginErrMsg( error_str )
+
+   obj.msgout(sprintf('\nERROR: EEGLAB plugin "%s" is not installed. \n\n', error_str), 'msg_warning');
+
+end
+##### SOURCE END #####
+--></body></html>

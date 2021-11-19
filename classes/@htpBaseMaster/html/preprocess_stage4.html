@@ -1,0 +1,702 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Preprocess Stage 4</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-02"><meta name="DC.source" content="preprocess_stage4.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Preprocess Stage 4</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">preprocess_stage4</a></li><li><a href="#5">disp_welcome</a></li></ul></div><h2 id="1">Usage</h2><p>obj = preprocess_stage4( obj )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><p>The optional input if the function is not self-invoked obj is the htpPreprocessMaster object.  The output is the updated htpPreprocessMaster object with information updated regarding the status and details of stage 4 completion.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright (C) 2019  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">preprocess_stage4</h2><p>Post-ica artifact detection is performed, automatic if the user selects the stage 4 auto button, or manually if the regular stage 4 button is selected, to finish the preprocessing of the group of subjects.</p><p>If the user is not on the right stage, it is determined if the subject has successfully completed stage 4 prior to the current moment.  If that is the case the subject will be saved to the appropriate directory and counted as completed.  If the subject is not on the right stage and has not previously completed stage 4, it will be marked as an error and the file will be skipped.</p><p>The data rank, set by the user in the gui settings, determines how many initial components are plotted to the user through the selectcomps.m function.  The user will have multiple windows of time series, components, and plots (power activity, colormaps of , etc.to guide their decision for artifact removal.  The various figures are placed next to the central messagebox that the user can then reject specific components by entering the number of the component they wish to reject.  Once all determined artifacts are removed, then the user can save their work for the subject into the postica directory and continue on to the next subject.  The user can also save their current progress and come back to the stage later to finish the in progress subjects.</p><p>The steps taken for stage 4 depend upon the type of data being preprocessed. If the data is Resting data, then the stage will proceed as described above.  If there are events in the dataset, then there are various paths taken depending on the type of event after the execution of the above component selection process.</p><p>If Event datasets,the subject will undergo stage A of din separation and be prompted to utilize the options dialog application to define the event epochs in the dataset.  Then, the data will be cleaned and saved with different paths taken for stage A epochs and every other stage din with stage A having extra parsing steps if the levelb attribute of the event configuration for each subject is set before cleaning and saving.</p><p>However, if the stage is B then level B of din separation will be performed. The other staged dins will proceed with cleaning of the epochs and saving for the subject without first parsing like for stage A.</p><pre class="codeinput"><span class="keyword">function</span> obj = preprocess_stage4( obj )
+
+stage_last = <span class="string">'postica'</span>;
+stage_next = <span class="string">'postcomps'</span>;
+
+[mc, mm, mw] = obj.tools_log;       <span class="comment">% output log</span>
+opt     = obj.formatOptions;        <span class="comment">% get GUI options</span>
+
+
+dipfitcalc = opt.dipfitcalc;
+
+disp_welcome(mm);
+
+
+obj.sub = obj.loadSub( stage_last );  <span class="comment">% retrieve subs from spreadsheet</span>
+
+
+obj.composeComponentCsv(obj.sub, str2double(opt.pca_rank));
+
+
+arrayfun(@( s ) s.setopt( opt ), obj.sub, <span class="string">'uni'</span>, 0);  <span class="comment">% assign current options to each sub</span>
+
+objStageStatus              = obj.htpcfg.objStageStatus;
+objStageStatus_completed    = obj.htpcfg.objStageStatus_completed;
+
+<span class="comment">% initalize loops</span>
+prev_files = 0; skip_files = 0; errorchk = 0; uniquei = 1; flg = 0;
+
+<span class="comment">%</span>
+
+<span class="keyword">if</span> strcmp(obj.htpcfg.optnow.Stage2_CleanMode, <span class="string">'FullAuto'</span>) || strcmp(obj.htpcfg.optnow.Stage2_CleanMode, <span class="string">'ASR'</span>)
+
+    sub = obj.sub;
+
+    <span class="keyword">for</span> i = 1 : length(sub)
+        s = sub(i);
+        <span class="keyword">if</span> ismember(i, objStageStatus)
+            s.loadDataset( <span class="string">'postica'</span> );
+
+            <span class="comment">% automatically select components</span>
+            <span class="comment">% algo: out of first 50 components</span>
+            <span class="comment">% selects cardiac, eye, line, and muscle components</span>
+            <span class="comment">% that have &gt; threshold confidence (i.e. 0.75 out of 1).</span>
+            <span class="comment">% excludes file if &gt; 10% of total # of total components</span>
+            <span class="comment">% for generating auto drafts for testing only</span>
+            s.removeComps_auto( 0.75, false);
+
+            <span class="comment">% remove components</span>
+            s.compRemove;
+
+            <span class="comment">% Generic DIPFIT calculations</span>
+            <span class="keyword">if</span> strcmpi(dipfitcalc,<span class="string">'On'</span>)
+                s.icview;
+                s.calc_dipoles;
+            <span class="keyword">else</span>
+                s.set_dipfitcalc( 0 );
+            <span class="keyword">end</span>
+
+            <span class="comment">% save cleaned dataset into the postcomps directory</span>
+
+            obj.tool_saveSubject( s, stage_next);
+
+            <span class="comment">% unload data &amp; decrease memory footprint</span>
+            s.unloadDataset;
+
+            s.outputRow(<span class="string">'postcomps'</span>);
+
+        <span class="keyword">end</span>
+
+        sub(i) = s;
+    <span class="keyword">end</span>
+
+    obj.sub = sub;
+
+<span class="keyword">else</span>
+    <span class="comment">% manual mode</span>
+    <span class="keyword">while</span> uniquei &lt;= length(obj.sub) &amp;&amp; flg ~=2
+
+        s = obj.sub(uniquei);   <span class="comment">% allows for parallel processing and temporary changes</span>
+
+        <span class="keyword">if</span> ismember(uniquei, objStageStatus) <span class="comment">% processes only files in correct stage</span>
+
+            s.setUser( obj.user );
+            s.changeStudyTitle( obj.study_title );
+
+            s.subj_id = [uniquei length(obj.sub)];
+
+            <span class="keyword">switch</span> opt.epoch_type
+
+                <span class="keyword">case</span> <span class="string">'Event'</span>
+
+                    s.loadDataset( <span class="string">'postica'</span> );
+                    s = tool_selectComps( obj, s);
+                    mc(sprintf(<span class="string">'Components Selected: %s\n'</span>, mat2str(s.proc_removeComps)));
+                    <span class="comment">%s = s.compRemove;</span>
+
+                    s.setStudyType( opt.epoch_type );
+                    <span class="keyword">if</span> ~s.exclude_switch
+                        <span class="comment">% Level A of DIN Separation</span>
+                        s.eventcfg.levelb = 0;
+                        s.eventcfg.fixsettings = 0;
+
+                        <span class="keyword">if</span> strcmp(opt.epoch_type, <span class="string">'Event'</span>) == 1
+                            uihandle = optionsDialogApp( s, obj );
+                            uiwait(uihandle.UIFigure);
+                        <span class="keyword">end</span>
+                        obj.tool_saveSubject( s, stage_next);
+                        s = obj.tool_createEpochs( s );
+                        obj.htpcfg.eventcfg = s.eventcfg;
+
+                        <span class="comment">% break up file into "big" cuts</span>
+                        <span class="comment">% select event classifiers</span>
+                        <span class="comment">% locate epochs that have classifiers within the big</span>
+                        <span class="comment">% epoch</span>
+                        <span class="comment">% make array of epochs</span>
+
+                        <span class="keyword">switch</span> s.eventcfg.stage
+                            <span class="keyword">case</span> <span class="string">'A'</span>
+
+                                <span class="keyword">if</span> s.eventcfg.levelb == 1
+
+                                    <span class="keyword">for</span> j = 1 : length(s.eventcfg.event_fn)
+
+                                        s.loadDataset_Event( j );
+
+                                        s = dinparser( s );
+
+                                        <span class="keyword">if</span> strcmp(s.eventcfg.stage, <span class="string">'C'</span>)
+                                            <span class="comment">% s.eventcfg.details(3:end,:) = [];</span>
+                                            <span class="keyword">for</span> z = 2 : length(  s.eventcfg.event_fn' )
+                                                s.loadDataset_Event( z );
+
+                                                s = obj.tool_cleanEpochs( s );
+
+                                            <span class="keyword">end</span>
+                                        <span class="keyword">end</span>
+                                    <span class="keyword">end</span>
+
+                                    s = obj.tool_cleanEpochs( s );
+
+                                    obj.tool_saveSubject( s, stage_next);
+
+
+                                    s.unloadDataset;
+
+                                    s.outputRow(<span class="string">'postcomps'</span>);
+
+                                <span class="keyword">else</span>
+                                    <span class="keyword">for</span> j = 1 : length(s.eventcfg.event_fn)
+                                        s.loadDataset_Event( j );
+                                        s = obj.tool_cleanEpochs( s );
+                                        obj.tool_saveSubject( s, stage_next);
+
+
+                                        s.unloadDataset;
+                                        s.outputRow(<span class="string">'postcomps'</span>);
+
+                                    <span class="keyword">end</span>
+
+                                <span class="keyword">end</span>
+
+                            <span class="keyword">case</span> <span class="string">'B'</span>
+                                <span class="keyword">if</span> s.eventcfg.levelb == 1
+                                    s.loadDataset_Event(1);
+
+                                    <span class="comment">% Level B of DIN Separation</span>
+                                    <span class="keyword">if</span> strcmp(opt.epoch_type, <span class="string">'Event'</span>) == 1
+                                        uihandle = optionsDialogApp( s, obj );
+                                        uiwait(uihandle.UIFigure);
+                                    <span class="keyword">end</span>
+                                    obj.tool_saveSubject( s, stage_last);
+
+                                    s.eventcfg.fixsettings = 1; <span class="comment">% set next sub files identical</span>
+                                    obj.htpcfg.eventcfg = s.eventcfg;
+
+
+                                    s = obj.tool_createEpochs( s );
+                                <span class="keyword">end</span>
+                        <span class="keyword">end</span>
+
+
+                    <span class="keyword">else</span>
+                        s.unloadDataset;
+
+                        s.outputRow(<span class="string">'postcomps'</span>);
+                    <span class="keyword">end</span>
+
+                <span class="keyword">case</span> <span class="string">'Rest'</span>
+
+                    s.loadDataset( <span class="string">'postica'</span> );
+
+                    s = tool_selectComps( obj, s);
+
+                    <span class="comment">% save cleaned dataset into the postcomps directory</span>
+
+                    obj.tool_saveSubject( s, stage_next);
+
+                    <span class="comment">% unload data &amp; decrease memory footprint</span>
+                    s.unloadDataset;
+
+                    s.outputRow(<span class="string">'postcomps'</span>);
+
+                <span class="keyword">otherwise</span>
+            <span class="keyword">end</span>
+
+            [flg, errorchk] = obj.redoOrContinue( s );
+
+        <span class="keyword">else</span>
+
+            <span class="keyword">if</span> ismember(uniquei, objStageStatus_completed)
+                s.unloadDataset;
+                s.proc_state = <span class="string">'postcomps'</span>;
+                s.outputRow(stage_next);
+                prev_files = prev_files + 1;
+                flg = 0;
+            <span class="keyword">else</span>
+                s.unloadDataset;
+                s.outputRow(<span class="string">'error'</span>);
+                skip_files = skip_files + 1;
+            <span class="keyword">end</span>
+
+        <span class="keyword">end</span>
+
+        <span class="comment">% Code to verify or redo subject</span>
+        <span class="keyword">switch</span> flg
+            <span class="keyword">case</span> 0
+                obj.sub(uniquei) = s;  <span class="comment">% apply changes to persistant object</span>
+                uniquei = uniquei + 1;   <span class="comment">% increment counter</span>
+            <span class="keyword">case</span> 1
+                <span class="comment">% does not increment counter</span>
+                obj.msgout( <span class="string">'Redo subject selected.'</span>);
+                s = [];
+            <span class="keyword">case</span> 2 <span class="comment">% added 9/4 save work EP</span>
+
+                mm(<span class="string">'Save work in progress...'</span>);
+                <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+stagecnt = @( stage_name ) sum(strcmpi( stage_name, {obj.sub(:).proc_state} ));
+stagedisp = @( stage_name, n ) sprintf(<span class="string">'Stage 4 %s: %d'</span>, stage_name, n);
+
+mm( stagedisp( <span class="string">'Total Valid:'</span>, stagecnt( stage_last ) + stagecnt( stage_next ) )  );
+mm( stagedisp( stage_last, stagecnt( stage_last ) ) );
+mm( stagedisp( stage_next, stagecnt( stage_next ) ) );
+[n, idx] = obj.countExcluded;
+mm( stagedisp( <span class="string">'Excluded:'</span>, n ));
+
+<span class="keyword">if</span> ~isempty( idx )
+
+    <span class="keyword">for</span> ei = 1 : length( idx )
+
+        s = obj.sub(idx(ei));
+        mm( sprintf(<span class="string">'  ID: %d\t%s (%d): %s'</span>, idx(ei), s.subj_basename, length(s.proc_removeComps), num2str(s.proc_removeComps)) );
+
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> flg == 2, save_desc = <span class="string">'in_progress'</span>; <span class="keyword">else</span>, save_desc = <span class="string">'Default'</span>; <span class="keyword">end</span>
+
+
+obj.createResultsCsv(obj.sub, <span class="string">'postcomps'</span>, save_desc);
+<span class="comment">%obj.createComponentCsv(obj.sub);</span>
+mm( sprintf(<span class="string">'CSV &amp; mat file: %s\n'</span>, obj.htpcfg.csvfile));
+
+<span class="comment">%obj.msgout(sprintf('Summary'));</span>
+<span class="comment">%obj.msgout(sprintf('\nFiles Processed: %d\n', length(objStageStatus)));</span>
+<span class="comment">%obj.msgout(sprintf('Previously Completed Files: %d\n', prev_files));</span>
+<span class="comment">%obj.msgout(sprintf('Skipped Files: %d\n', skip_files));</span>
+<span class="comment">%obj.msgout(sprintf('Other Errors: %d\n', errorchk));</span>
+
+<span class="comment">% obj.createResultsCsv(obj.sub, 'postcomps', 'Default');</span>
+
+<span class="keyword">end</span>
+</pre><h2 id="5">disp_welcome</h2><p>Display beginning notification for stage 4 of preprocessing to user</p><pre class="codeinput"><span class="keyword">function</span> disp_welcome(mm)
+    mm(<span class="string">'Starting Stage 4: Post-ICA Component Identification'</span>);
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Preprocess Stage 4
+%
+%%% Usage
+%   
+% obj = preprocess_stage4( obj )
+%
+%%% Parameters
+%
+% * INPUTS: obj
+%
+% * OUTPUTS: obj
+%
+% The optional input if the function is not self-invoked obj is the 
+% htpPreprocessMaster object.  The output is the updated 
+% htpPreprocessMaster object with information updated regarding the 
+% status and details of stage 4 completion.
+%
+%%% Copyright and Contact Information
+%
+% Copyright (C) 2019  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% preprocess_stage4
+% Post-ica artifact detection is performed, automatic if the user selects 
+% the stage 4 auto button, or manually if the regular stage 4 button is 
+% selected, to finish the preprocessing of the group of subjects.
+%
+% If the user is not on the right stage, it is determined if the subject has
+% successfully completed stage 4 prior to the current moment.  If that is
+% the case the subject will be saved to the appropriate directory and
+% counted as completed.  If the subject is not on the right stage and has
+% not previously completed stage 4, it will be marked as an error and the
+% file will be skipped.
+%
+% The data rank, set by the user in the gui settings, determines how many
+% initial components are plotted to the user through the selectcomps.m
+% function.  The user will have multiple windows of time series, components,
+% and plots (power activity, colormaps of , etc.to guide their decision for 
+% artifact removal.  The various figures are placed next to the central 
+% messagebox that the user can then reject specific components by entering 
+% the number of the component they wish to reject.  Once all determined 
+% artifacts are removed, then the user can save their work for the subject 
+% into the postica directory and continue on to the next subject.  The user
+% can also save their current progress and come back to the stage later to 
+% finish the in progress subjects. 
+%
+% The steps taken for stage 4 depend upon the type of data being preprocessed.  
+% If the data is Resting data, then the stage will proceed as described
+% above.  If there are events in the dataset, then there are various paths
+% taken depending on the type of event after the execution of the above 
+% component selection process. 
+%
+% If Event datasets,the subject will undergo stage A of din separation and 
+% be prompted to utilize the options dialog application to define the event 
+% epochs in the dataset.  Then, the data will be cleaned and saved with 
+% different paths taken for stage A epochs and every other stage din with 
+% stage A having extra parsing steps if the levelb attribute of the event 
+% configuration for each subject is set before cleaning and saving.  
+%
+% However, if the stage is B then level B of din separation will be 
+% performed. The other staged dins will proceed with cleaning of the epochs 
+% and saving for the subject without first parsing like for stage A. 
+function obj = preprocess_stage4( obj )
+
+stage_last = 'postica';
+stage_next = 'postcomps';
+
+[mc, mm, mw] = obj.tools_log;       % output log
+opt     = obj.formatOptions;        % get GUI options
+
+
+dipfitcalc = opt.dipfitcalc;
+
+disp_welcome(mm);
+
+
+obj.sub = obj.loadSub( stage_last );  % retrieve subs from spreadsheet
+
+
+obj.composeComponentCsv(obj.sub, str2double(opt.pca_rank));
+
+
+arrayfun(@( s ) s.setopt( opt ), obj.sub, 'uni', 0);  % assign current options to each sub
+
+objStageStatus              = obj.htpcfg.objStageStatus;
+objStageStatus_completed    = obj.htpcfg.objStageStatus_completed;
+
+% initalize loops
+prev_files = 0; skip_files = 0; errorchk = 0; uniquei = 1; flg = 0;
+
+% 
+
+if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'FullAuto') || strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'ASR')
+    
+    sub = obj.sub;
+    
+    for i = 1 : length(sub)
+        s = sub(i);
+        if ismember(i, objStageStatus)
+            s.loadDataset( 'postica' );
+            
+            % automatically select components
+            % algo: out of first 50 components
+            % selects cardiac, eye, line, and muscle components
+            % that have > threshold confidence (i.e. 0.75 out of 1).
+            % excludes file if > 10% of total # of total components
+            % for generating auto drafts for testing only            
+            s.removeComps_auto( 0.75, false);     
+            
+            % remove components
+            s.compRemove;
+            
+            % Generic DIPFIT calculations
+            if strcmpi(dipfitcalc,'On')
+                s.icview;
+                s.calc_dipoles;
+            else
+                s.set_dipfitcalc( 0 );
+            end
+            
+            % save cleaned dataset into the postcomps directory
+            
+            obj.tool_saveSubject( s, stage_next);
+            
+            % unload data & decrease memory footprint
+            s.unloadDataset;
+            
+            s.outputRow('postcomps');
+            
+        end
+        
+        sub(i) = s;
+    end
+    
+    obj.sub = sub;
+    
+else
+    % manual mode
+    while uniquei <= length(obj.sub) && flg ~=2
+        
+        s = obj.sub(uniquei);   % allows for parallel processing and temporary changes
+        
+        if ismember(uniquei, objStageStatus) % processes only files in correct stage
+            
+            s.setUser( obj.user );
+            s.changeStudyTitle( obj.study_title );
+            
+            s.subj_id = [uniquei length(obj.sub)];
+            
+            switch opt.epoch_type
+                
+                case 'Event'
+                    
+                    s.loadDataset( 'postica' );
+                    s = tool_selectComps( obj, s);
+                    mc(sprintf('Components Selected: %s\n', mat2str(s.proc_removeComps)));
+                    %s = s.compRemove;
+                    
+                    s.setStudyType( opt.epoch_type );
+                    if ~s.exclude_switch
+                        % Level A of DIN Separation
+                        s.eventcfg.levelb = 0;
+                        s.eventcfg.fixsettings = 0;
+                        
+                        if strcmp(opt.epoch_type, 'Event') == 1
+                            uihandle = optionsDialogApp( s, obj );
+                            uiwait(uihandle.UIFigure);
+                        end
+                        obj.tool_saveSubject( s, stage_next);
+                        s = obj.tool_createEpochs( s );
+                        obj.htpcfg.eventcfg = s.eventcfg;
+                        
+                        % break up file into "big" cuts
+                        % select event classifiers
+                        % locate epochs that have classifiers within the big
+                        % epoch
+                        % make array of epochs
+                        
+                        switch s.eventcfg.stage
+                            case 'A'
+                                
+                                if s.eventcfg.levelb == 1
+                                    
+                                    for j = 1 : length(s.eventcfg.event_fn)
+                                        
+                                        s.loadDataset_Event( j );
+                                        
+                                        s = dinparser( s );
+                                        
+                                        if strcmp(s.eventcfg.stage, 'C')
+                                            % s.eventcfg.details(3:end,:) = [];
+                                            for z = 2 : length(  s.eventcfg.event_fn' )
+                                                s.loadDataset_Event( z );
+                                                
+                                                s = obj.tool_cleanEpochs( s );
+                                                
+                                            end
+                                        end
+                                    end
+                                    
+                                    s = obj.tool_cleanEpochs( s );
+                                    
+                                    obj.tool_saveSubject( s, stage_next);
+                                    
+                                    
+                                    s.unloadDataset;
+                                    
+                                    s.outputRow('postcomps');
+                                    
+                                else
+                                    for j = 1 : length(s.eventcfg.event_fn)
+                                        s.loadDataset_Event( j );
+                                        s = obj.tool_cleanEpochs( s );
+                                        obj.tool_saveSubject( s, stage_next);
+                                        
+                                        
+                                        s.unloadDataset;
+                                        s.outputRow('postcomps');
+                                        
+                                    end
+                                    
+                                end
+                                
+                            case 'B'
+                                if s.eventcfg.levelb == 1
+                                    s.loadDataset_Event(1);
+                                    
+                                    % Level B of DIN Separation
+                                    if strcmp(opt.epoch_type, 'Event') == 1
+                                        uihandle = optionsDialogApp( s, obj );
+                                        uiwait(uihandle.UIFigure);
+                                    end
+                                    obj.tool_saveSubject( s, stage_last);
+                                    
+                                    s.eventcfg.fixsettings = 1; % set next sub files identical
+                                    obj.htpcfg.eventcfg = s.eventcfg;
+                                    
+                                    
+                                    s = obj.tool_createEpochs( s );
+                                end
+                        end
+                        
+                        
+                    else
+                        s.unloadDataset;
+                        
+                        s.outputRow('postcomps');
+                    end
+                    
+                case 'Rest'
+                    
+                    s.loadDataset( 'postica' );
+                    
+                    s = tool_selectComps( obj, s);
+                    
+                    % save cleaned dataset into the postcomps directory
+                    
+                    obj.tool_saveSubject( s, stage_next);
+                    
+                    % unload data & decrease memory footprint
+                    s.unloadDataset;
+                    
+                    s.outputRow('postcomps');
+                    
+                otherwise
+            end
+            
+            [flg, errorchk] = obj.redoOrContinue( s );
+            
+        else
+            
+            if ismember(uniquei, objStageStatus_completed)
+                s.unloadDataset;
+                s.proc_state = 'postcomps';
+                s.outputRow(stage_next);
+                prev_files = prev_files + 1;
+                flg = 0;
+            else
+                s.unloadDataset;
+                s.outputRow('error');
+                skip_files = skip_files + 1;
+            end
+            
+        end
+        
+        % Code to verify or redo subject
+        switch flg
+            case 0
+                obj.sub(uniquei) = s;  % apply changes to persistant object
+                uniquei = uniquei + 1;   % increment counter
+            case 1
+                % does not increment counter
+                obj.msgout( 'Redo subject selected.');
+                s = [];
+            case 2 % added 9/4 save work EP
+                
+                mm('Save work in progress...');
+                break;
+        end
+        
+    end
+end
+
+stagecnt = @( stage_name ) sum(strcmpi( stage_name, {obj.sub(:).proc_state} ));
+stagedisp = @( stage_name, n ) sprintf('Stage 4 %s: %d', stage_name, n);
+
+mm( stagedisp( 'Total Valid:', stagecnt( stage_last ) + stagecnt( stage_next ) )  );
+mm( stagedisp( stage_last, stagecnt( stage_last ) ) );
+mm( stagedisp( stage_next, stagecnt( stage_next ) ) );
+[n, idx] = obj.countExcluded;
+mm( stagedisp( 'Excluded:', n ));
+
+if ~isempty( idx )
+    
+    for ei = 1 : length( idx )
+        
+        s = obj.sub(idx(ei));
+        mm( sprintf('  ID: %d\t%s (%d): %s', idx(ei), s.subj_basename, length(s.proc_removeComps), num2str(s.proc_removeComps)) );
+        
+    end
+    
+end
+
+if flg == 2, save_desc = 'in_progress'; else, save_desc = 'Default'; end
+
+
+obj.createResultsCsv(obj.sub, 'postcomps', save_desc);
+%obj.createComponentCsv(obj.sub);
+mm( sprintf('CSV & mat file: %s\n', obj.htpcfg.csvfile));
+
+%obj.msgout(sprintf('Summary'));
+%obj.msgout(sprintf('\nFiles Processed: %d\n', length(objStageStatus)));
+%obj.msgout(sprintf('Previously Completed Files: %d\n', prev_files));
+%obj.msgout(sprintf('Skipped Files: %d\n', skip_files));
+%obj.msgout(sprintf('Other Errors: %d\n', errorchk));
+
+% obj.createResultsCsv(obj.sub, 'postcomps', 'Default');
+
+end
+
+%% disp_welcome
+% Display beginning notification for stage 4 of preprocessing to user 
+function disp_welcome(mm)
+    mm('Starting Stage 4: Post-ICA Component Identification');
+end
+##### SOURCE END #####
+--></body></html>

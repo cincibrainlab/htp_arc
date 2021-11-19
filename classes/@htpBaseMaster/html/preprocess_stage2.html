@@ -1,0 +1,840 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Preprocess Stage 2</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-02"><meta name="DC.source" content="preprocess_stage2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Preprocess Stage 2</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">preprocess_stage2</a></li><li><a href="#5">qualityCheck</a></li></ul></div><h2 id="1">Usage</h2><p>obj = preprocess_stage2( obj )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><p>The optional input if the function is not self-invoked obj is the htpPreprocessMaster object.  The output is the updated htpPreprocessMaster object with information updated regarding the status and details of stage 2 completion.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright (C) 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">preprocess_stage2</h2><p>Preprocesses artifacts subject by subject by computing spectrum for channels and presenting the series of data for the user to mark channels to be rejected via manual selection along with the automatically rejected channels outside of threshold and frequency limits.</p><p>Missing channels will be interpolated and upon continuation the data will be split into epochs with overlap.  The user can select the segments to reject and segments will be removed and true data rank calculated again.</p><p>The third and final step will generate epochs from the .set file with 0% overlap of length set by the user in the stage 2 pipeline options.  Any discontinuous trial data, or unreferenced events, will be removed automatically.  Upon trial rejection completion, the user can save the dataset and continue or redo the stage 2 process as they wish.</p><p>If merging is allowed via the pipeline user defined option, the user will be prompted accordingly to merge existing data files on a subejct by subject basis.</p><p>Verification of cleaning process and outcome such as files processed, those skipped, those that had been previously completed, and other errors that occurred during the stage can be done by user via the pipeline output window or the command console</p><pre class="codeinput"><span class="keyword">function</span> obj = preprocess_stage2(obj)
+
+[mc, mm, mw] = obj.tools_log;
+
+mm(<span class="string">'Starting Stage 2: Preprocessing Artifacts...'</span>);
+
+stage_last = <span class="string">'import'</span>;
+stage_next = <span class="string">'preica'</span>;
+
+obj.sub = obj.loadSub(stage_last);
+
+opt = obj.formatOptions;
+
+arrayfun(@(s) s.setopt(opt), obj.sub, <span class="string">'uni'</span>, 0);
+
+
+objStageStatus = obj.htpcfg.objStageStatus;
+objStageStatus_completed = obj.htpcfg.objStageStatus_completed;
+
+mm(sprintf(<span class="string">'\nCurrent Data Directory: %s\n\n'</span>, obj.htpcfg.basePath'));
+
+<span class="keyword">if</span> strcmp(opt.mergemode, <span class="string">'Yes'</span>) &amp;&amp; obj.sub(1).proc_merge.status ~= 1
+
+    uihandle = mergeDialogApp(obj);
+    uiwait(uihandle.UIFigure);
+
+    <span class="keyword">if</span> obj.htpcfg.mergesuccess == true
+        mm(<span class="string">'Successful merge dialog.'</span>);
+        obj.sub = mergeSubjects(obj.sub);
+    <span class="keyword">else</span>
+        mm(<span class="string">'Please turn off merge mode or try again to continue.'</span>);
+        <span class="keyword">return</span>;
+    <span class="keyword">end</span>
+    arrayfun(@(s) s.setopt(opt), obj.sub, <span class="string">'uni'</span>, 0);
+    arrayfun(@(s) s.storeDataset(s.EEG, obj.htpcfg.pathdb.import, s.subj_subfolder, s.filename.import), obj.sub, <span class="string">'uni'</span>, 0);
+    arrayfun(@(s) s.unloadDataset, obj.sub, <span class="string">'uni'</span>, 0);
+    arrayfun(@(s) s.outputRow(stage_last), obj.sub, <span class="string">'uni'</span>, 0);
+
+    arrayfun(@(s) s.outputRow(stage_last), obj.sub, <span class="string">'uni'</span>, 0);
+
+    obj.createResultsCsv(obj.sub, <span class="string">'import'</span>, <span class="string">'Merge'</span>);
+
+<span class="keyword">end</span>
+
+mm(sprintf(<span class="string">'Current Data Directory: %s'</span>, obj.htpcfg.basePath));
+
+
+prev_files = 0;
+skip_files = 0;
+errorchk = 0;
+i = 1;
+flag = 0;
+
+obj.htpcfg.objStageStatus = find(obj.selectObjects(stage_last, obj.htpcfg.csvfile)); <span class="comment">% current stage</span>
+obj.htpcfg.objStageStatus_completed = find(obj.selectObjects(stage_next, obj.htpcfg.csvfile)); <span class="comment">% completed</span>
+
+user = obj.htpcfg.user;
+<span class="comment">%objStageStatus = objStageStatus(63:end);</span>
+
+<span class="keyword">if</span> strcmp(obj.htpcfg.optnow.Stage2_CleanMode, <span class="string">'FullAuto'</span>)
+    mm(<span class="string">'\nFull Auto Cleaning Operations\n'</span>);
+    totalsubs = length(obj.sub);
+    sub = obj.sub;
+    importdir = obj.htpcfg.pathdb.import;
+
+    <span class="keyword">for</span> i = 1:totalsubs
+
+        s = sub(i);
+
+        s.setUser(user);
+
+        [QI_pass, QI_msg] = qualityCheck(obj, s);
+
+        <span class="keyword">if</span> QI_pass &amp;&amp; ismember(i, objStageStatus)
+
+            str_status = sprintf(<span class="string">'\nOpening dataset (%d of %d): %s'</span>, i, totalsubs, s.subj_basename);
+            mc(str_status);
+            s.str_plottitle = str_status;
+            mm(sprintf(<span class="string">'\nFolder: %s\n'</span>, s.subj_subfolder));
+
+
+            s.openDataset(importdir, s.subj_subfolder, s.filename.import);
+
+            s.trim_edges(10);
+
+            s.autoclean;
+
+            s = obj.tool_createEpochs(s);
+
+            s.EEG.filename = s.filename.(stage_next);
+
+            obj.tool_saveSubject(s, stage_next);
+
+            s.unloadDataset;
+
+            errorchk = 0;
+
+            s.outputRow(stage_next);
+
+            flag = 0;
+
+            sub(i) = s;
+
+        <span class="keyword">else</span>
+
+            s.proc_state = QI_msg;
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+
+    obj.sub = sub;
+<span class="keyword">end</span>
+
+
+<span class="keyword">if</span> strcmp(obj.htpcfg.optnow.Stage2_CleanMode, <span class="string">'Manual'</span>) || strcmp(obj.htpcfg.optnow.Stage2_CleanMode, <span class="string">'ASR'</span>)
+    mm(<span class="string">'\nManual Cleaning Operations\n'</span>);
+    <span class="keyword">while</span> i &lt;= length(obj.sub)
+
+        s = obj.sub(i);
+
+        s.setUser(obj.htpcfg.user);
+
+        [QI_pass, QI_msg] = qualityCheck(obj, s);
+
+        <span class="keyword">if</span> QI_pass
+
+            <span class="keyword">if</span> ismember(i, objStageStatus) <span class="comment">% processes only files specified by the spreadsheet</span>
+
+
+                str_status = sprintf(<span class="string">'\nOpening dataset (%d of %d): %s'</span>, i, length(obj.sub), s.subj_basename);
+                mc(str_status);
+                s.str_plottitle = str_status;
+                mm(sprintf(<span class="string">'\nFolder: %s\n'</span>, s.subj_subfolder));
+
+
+                s.openDataset(obj.htpcfg.pathdb.import, s.subj_subfolder, s.filename.import);
+
+                s.trim_edges(10);
+
+
+                <span class="keyword">if</span> strcmp(obj.htpcfg.optnow.Stage2_CleanMode, <span class="string">'FullAuto'</span>)
+                    s.autoclean;
+
+                    s = obj.tool_createEpochs(s);
+
+                    s.EEG.filename = s.filename.(stage_next);
+
+                    obj.tool_saveSubject(s, stage_next);
+
+                    s.unloadDataset;
+
+                    errorchk = 0;
+
+                    flag = 0;
+
+                <span class="keyword">else</span>
+                    s = obj.tool_manualChanClean(s);
+
+                    <span class="keyword">if</span> strcmp(opt.epoch_type, <span class="string">'Rest'</span>) == 1
+
+                        s = obj.tool_createEpochs(s);
+
+                        s = obj.tool_cleanEpochs(s);
+
+                    <span class="keyword">end</span>
+                    s.EEG.filename = s.filename.(stage_next);
+                    obj.tool_saveSubject(s, stage_next);
+
+
+                    s.unloadDataset;
+
+                    [flag, errorchk] = obj.redoOrContinue(s);
+
+                <span class="keyword">end</span>
+
+
+                <span class="keyword">if</span> errorchk == 0
+
+                    s.outputRow(stage_next);
+
+                <span class="keyword">else</span>
+                    <span class="keyword">if</span> flag ~= 1
+                        s.outputRow(<span class="string">'error'</span>);
+                    <span class="keyword">end</span>
+                <span class="keyword">end</span>
+
+            <span class="keyword">else</span>
+                <span class="keyword">if</span> ismember(i, objStageStatus_completed)
+
+                    s.unloadDataset;
+                    s.outputRow(stage_next);
+                    prev_files = prev_files + 1;
+                <span class="keyword">else</span>
+
+                    s.unloadDataset;
+                    s.outputRow(<span class="string">'error'</span>);
+                    skip_files = skip_files + 1;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+        <span class="keyword">else</span>
+
+            s.proc_state = QI_msg;
+
+        <span class="keyword">end</span>
+
+
+        <span class="keyword">switch</span> flag
+            <span class="keyword">case</span> 0
+                obj.sub(i) = s;
+                i = i + 1;
+            <span class="keyword">case</span> 1
+
+                obj.msgout(<span class="string">'Redo subject selected.'</span>);
+                s = [];
+            <span class="keyword">case</span> 2
+
+                mm(<span class="string">'Save work in progress...'</span>);
+                <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+
+        <span class="comment">% Code to verify or redo subject</span>
+        <span class="comment">%         if flag == 1  % do not increment "i" counter if redo</span>
+        <span class="comment">%</span>
+        <span class="comment">%         else</span>
+        <span class="comment">%             obj.sub(i) = s;  % apply changes to persistant object</span>
+        <span class="comment">%             i = i + 1;   % increment counter</span>
+        <span class="comment">%         end</span>
+
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+
+<span class="keyword">if</span> strcmp(obj.htpcfg.optnow.Stage2_CleanMode, <span class="string">'ContCleanOnly'</span>)
+
+    mm(<span class="string">'\nManual Cleaning Operations\n'</span>);
+    <span class="keyword">while</span> i &lt;= length(obj.sub)
+
+        s = obj.sub(i);
+
+        s.setUser(obj.htpcfg.user);
+
+        [QI_pass, QI_msg] = qualityCheck(obj, s);
+
+        <span class="keyword">if</span> QI_pass
+
+            <span class="keyword">if</span> ismember(i, objStageStatus)
+
+
+                str_status = sprintf(<span class="string">'\nOpening dataset (%d of %d): %s'</span>, i, length(obj.sub), s.subj_basename);
+                mc(str_status);
+                s.str_plottitle = str_status;
+                mm(sprintf(<span class="string">'\nFolder: %s\n'</span>, s.subj_subfolder));
+
+
+                s.openDataset(obj.htpcfg.pathdb.import, s.subj_subfolder, s.filename.import);
+
+                <span class="comment">%   s.trim_edges( 10 );</span>
+
+                s = obj.tool_manualChanClean(s);
+
+                <span class="keyword">if</span> strcmp(opt.epoch_type, <span class="string">'Rest'</span>) == 1
+
+                    s = obj.tool_createEpochs(s);
+
+                    s = obj.tool_cleanEpochs(s);
+
+
+                <span class="keyword">end</span>
+                s.EEG.filename = s.filename.(stage_next);
+                obj.tool_saveSubject(s, stage_next);
+
+
+                s.unloadDataset;
+
+                [flag, errorchk] = obj.redoOrContinue(s);
+
+            <span class="keyword">end</span>
+
+
+            <span class="keyword">if</span> errorchk == 0
+
+                s.outputRow(stage_next);
+
+            <span class="keyword">else</span>
+                <span class="keyword">if</span> flag ~= 1
+                    s.outputRow(<span class="string">'error'</span>);
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+        <span class="keyword">else</span>
+            <span class="keyword">if</span> ismember(i, objStageStatus_completed)
+
+                s.unloadDataset;
+                s.outputRow(stage_next);
+                prev_files = prev_files + 1;
+            <span class="keyword">else</span>
+
+                s.unloadDataset;
+                s.outputRow(<span class="string">'error'</span>);
+                skip_files = skip_files + 1;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+
+
+        <span class="keyword">switch</span> flag
+            <span class="keyword">case</span> 0
+                obj.sub(i) = s;
+                i = i + 1;
+            <span class="keyword">case</span> 1
+
+                obj.msgout(<span class="string">'Redo subject selected.'</span>);
+                s = [];
+            <span class="keyword">case</span> 2
+
+                mm(<span class="string">'Save work in progress...'</span>);
+                <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+
+        <span class="comment">%         if flag == 1  % do not increment "i" counter if redo</span>
+        <span class="comment">%</span>
+        <span class="comment">%         else</span>
+        <span class="comment">%             obj.sub(i) = s;  % apply changes to persistant object</span>
+        <span class="comment">%             i = i + 1;   % increment counter</span>
+        <span class="comment">%         end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+mc(sprintf(<span class="string">'\nSummary'</span>));
+mm(sprintf(<span class="string">'\nFiles Processed: %d'</span>, length(objStageStatus)));
+mm(sprintf(<span class="string">'Previously Completed Files: %d'</span>, prev_files));
+mm(sprintf(<span class="string">'Skipped Files: %d'</span>, skip_files));
+mm(sprintf(<span class="string">'Other Errors: %d'</span>, errorchk));
+
+<span class="keyword">if</span> flag == 2, save_desc = <span class="string">'in_progress'</span>; <span class="keyword">else</span>, save_desc = <span class="string">'Default'</span>; <span class="keyword">end</span>
+
+<span class="comment">%obj.createResultsCsv(obj.sub, stage_next, 'Default');</span>
+obj.createResultsCsv(obj.sub, stage_next, save_desc);
+
+<span class="keyword">end</span>
+</pre><h2 id="5">qualityCheck</h2><p>Check that the duration of the data meets the duration criteria (in seconds) specified for allowed preprocessing to take place.</p><pre class="codeinput"><span class="keyword">function</span> [QI_pass, QI_msg] = qualityCheck(o, s)
+
+QI_msg = {<span class="string">'SHORT'</span>};
+QI_pass = true;
+
+minimum_duration = 100;
+
+<span class="keyword">if</span> s.getDuration &lt; minimum_duration
+    QI_pass = false;
+    QI_msg = QI_msg{1};
+    o.msgout(sprintf(<span class="string">'%s: Did not meet minimum duration (%d s).'</span>, s.subj_basename, minimum_duration));
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Preprocess Stage 2
+%%% Usage
+%   
+% obj = preprocess_stage2( obj )
+%
+%%% Parameters
+%
+% * INPUTS: obj
+%
+% * OUTPUTS: obj
+%
+% The optional input if the function is not self-invoked obj is the 
+% htpPreprocessMaster object.  The output is the updated 
+% htpPreprocessMaster object with information updated regarding the 
+% status and details of stage 2 completion.
+%
+%%% Copyright and Contact Information
+% Copyright (C) 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% preprocess_stage2
+% Preprocesses artifacts subject by subject by computing spectrum for 
+% channels and presenting the series of data for the user to mark channels 
+% to be rejected via manual selection along with the automatically rejected 
+% channels outside of threshold and frequency limits.
+%
+% Missing channels will be interpolated and upon continuation the data will
+% be split into epochs with overlap.  The user can select the segments to 
+% reject and segments will be removed and true data rank calculated again.  
+%
+% The third and final step will generate epochs from the .set file with 0% 
+% overlap of length set by the user in the stage 2 pipeline options.  Any 
+% discontinuous trial data, or unreferenced events, will be removed 
+% automatically.  Upon trial rejection completion, the user can save the 
+% dataset and continue or redo the stage 2 process as they wish. 
+%
+% If merging is allowed via the pipeline user defined option, the user will
+% be prompted accordingly to merge existing data files on a subejct by
+% subject basis.
+%
+% Verification of cleaning process and outcome such as files processed, 
+% those skipped, those that had been previously completed, and other errors 
+% that occurred during the stage can be done by user via the
+% pipeline output window or the command console
+function obj = preprocess_stage2(obj)
+
+[mc, mm, mw] = obj.tools_log;
+
+mm('Starting Stage 2: Preprocessing Artifacts...');
+
+stage_last = 'import';
+stage_next = 'preica';
+
+obj.sub = obj.loadSub(stage_last);
+
+opt = obj.formatOptions;
+
+arrayfun(@(s) s.setopt(opt), obj.sub, 'uni', 0);
+
+
+objStageStatus = obj.htpcfg.objStageStatus;
+objStageStatus_completed = obj.htpcfg.objStageStatus_completed;
+
+mm(sprintf('\nCurrent Data Directory: %s\n\n', obj.htpcfg.basePath'));
+
+if strcmp(opt.mergemode, 'Yes') && obj.sub(1).proc_merge.status ~= 1
+
+    uihandle = mergeDialogApp(obj);
+    uiwait(uihandle.UIFigure);
+
+    if obj.htpcfg.mergesuccess == true
+        mm('Successful merge dialog.');
+        obj.sub = mergeSubjects(obj.sub);
+    else
+        mm('Please turn off merge mode or try again to continue.');
+        return;
+    end
+    arrayfun(@(s) s.setopt(opt), obj.sub, 'uni', 0);
+    arrayfun(@(s) s.storeDataset(s.EEG, obj.htpcfg.pathdb.import, s.subj_subfolder, s.filename.import), obj.sub, 'uni', 0);
+    arrayfun(@(s) s.unloadDataset, obj.sub, 'uni', 0);
+    arrayfun(@(s) s.outputRow(stage_last), obj.sub, 'uni', 0);
+
+    arrayfun(@(s) s.outputRow(stage_last), obj.sub, 'uni', 0);
+
+    obj.createResultsCsv(obj.sub, 'import', 'Merge');
+
+end
+
+mm(sprintf('Current Data Directory: %s', obj.htpcfg.basePath));
+
+
+prev_files = 0;
+skip_files = 0;
+errorchk = 0;
+i = 1;
+flag = 0;
+
+obj.htpcfg.objStageStatus = find(obj.selectObjects(stage_last, obj.htpcfg.csvfile)); % current stage
+obj.htpcfg.objStageStatus_completed = find(obj.selectObjects(stage_next, obj.htpcfg.csvfile)); % completed
+
+user = obj.htpcfg.user;
+%objStageStatus = objStageStatus(63:end);
+
+if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'FullAuto')
+    mm('\nFull Auto Cleaning Operations\n');
+    totalsubs = length(obj.sub);
+    sub = obj.sub;
+    importdir = obj.htpcfg.pathdb.import;
+
+    for i = 1:totalsubs
+
+        s = sub(i);
+
+        s.setUser(user);
+
+        [QI_pass, QI_msg] = qualityCheck(obj, s);
+
+        if QI_pass && ismember(i, objStageStatus)
+
+            str_status = sprintf('\nOpening dataset (%d of %d): %s', i, totalsubs, s.subj_basename);
+            mc(str_status);
+            s.str_plottitle = str_status;
+            mm(sprintf('\nFolder: %s\n', s.subj_subfolder));
+
+            
+            s.openDataset(importdir, s.subj_subfolder, s.filename.import);
+
+            s.trim_edges(10);
+
+            s.autoclean;
+
+            s = obj.tool_createEpochs(s);
+
+            s.EEG.filename = s.filename.(stage_next);
+
+            obj.tool_saveSubject(s, stage_next);
+
+            s.unloadDataset;
+
+            errorchk = 0;
+
+            s.outputRow(stage_next);
+
+            flag = 0;
+
+            sub(i) = s;
+
+        else
+
+            s.proc_state = QI_msg;
+        end
+
+    end
+
+    obj.sub = sub;
+end
+
+
+if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'Manual') || strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'ASR')
+    mm('\nManual Cleaning Operations\n');
+    while i <= length(obj.sub)
+
+        s = obj.sub(i); 
+
+        s.setUser(obj.htpcfg.user);
+
+        [QI_pass, QI_msg] = qualityCheck(obj, s);
+
+        if QI_pass
+
+            if ismember(i, objStageStatus) % processes only files specified by the spreadsheet
+
+
+                str_status = sprintf('\nOpening dataset (%d of %d): %s', i, length(obj.sub), s.subj_basename);
+                mc(str_status);
+                s.str_plottitle = str_status;
+                mm(sprintf('\nFolder: %s\n', s.subj_subfolder));
+
+                
+                s.openDataset(obj.htpcfg.pathdb.import, s.subj_subfolder, s.filename.import);
+
+                s.trim_edges(10); 
+
+                
+                if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'FullAuto')
+                    s.autoclean;
+
+                    s = obj.tool_createEpochs(s);
+
+                    s.EEG.filename = s.filename.(stage_next);
+
+                    obj.tool_saveSubject(s, stage_next);
+
+                    s.unloadDataset;
+
+                    errorchk = 0;
+
+                    flag = 0;
+
+                else
+                    s = obj.tool_manualChanClean(s);
+
+                    if strcmp(opt.epoch_type, 'Rest') == 1
+
+                        s = obj.tool_createEpochs(s);
+
+                        s = obj.tool_cleanEpochs(s);
+
+                    end
+                    s.EEG.filename = s.filename.(stage_next);
+                    obj.tool_saveSubject(s, stage_next);
+
+                    
+                    s.unloadDataset;
+
+                    [flag, errorchk] = obj.redoOrContinue(s);
+
+                end
+
+
+                if errorchk == 0
+
+                    s.outputRow(stage_next);
+
+                else
+                    if flag ~= 1
+                        s.outputRow('error');
+                    end
+                end
+
+            else 
+                if ismember(i, objStageStatus_completed)
+                    
+                    s.unloadDataset;
+                    s.outputRow(stage_next);
+                    prev_files = prev_files + 1;
+                else
+                    
+                    s.unloadDataset;
+                    s.outputRow('error');
+                    skip_files = skip_files + 1;
+                end
+            end
+
+        else
+
+            s.proc_state = QI_msg;
+
+        end
+
+        
+        switch flag
+            case 0
+                obj.sub(i) = s; 
+                i = i + 1; 
+            case 1
+                
+                obj.msgout('Redo subject selected.');
+                s = [];
+            case 2 
+
+                mm('Save work in progress...');
+                break;
+        end
+
+        % Code to verify or redo subject
+        %         if flag == 1  % do not increment "i" counter if redo
+        %
+        %         else
+        %             obj.sub(i) = s;  % apply changes to persistant object
+        %             i = i + 1;   % increment counter
+        %         end
+
+    end
+
+end
+
+
+if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'ContCleanOnly')
+
+    mm('\nManual Cleaning Operations\n');
+    while i <= length(obj.sub)
+
+        s = obj.sub(i); 
+
+        s.setUser(obj.htpcfg.user);
+
+        [QI_pass, QI_msg] = qualityCheck(obj, s);
+
+        if QI_pass
+
+            if ismember(i, objStageStatus) 
+
+
+                str_status = sprintf('\nOpening dataset (%d of %d): %s', i, length(obj.sub), s.subj_basename);
+                mc(str_status);
+                s.str_plottitle = str_status;
+                mm(sprintf('\nFolder: %s\n', s.subj_subfolder));
+
+                
+                s.openDataset(obj.htpcfg.pathdb.import, s.subj_subfolder, s.filename.import);
+
+                %   s.trim_edges( 10 ); 
+
+                s = obj.tool_manualChanClean(s);
+
+                if strcmp(opt.epoch_type, 'Rest') == 1
+
+                    s = obj.tool_createEpochs(s);
+
+                    s = obj.tool_cleanEpochs(s);
+
+
+                end
+                s.EEG.filename = s.filename.(stage_next);
+                obj.tool_saveSubject(s, stage_next);
+
+                
+                s.unloadDataset;
+
+                [flag, errorchk] = obj.redoOrContinue(s);
+
+            end
+
+
+            if errorchk == 0
+
+                s.outputRow(stage_next);
+
+            else
+                if flag ~= 1
+                    s.outputRow('error');
+                end
+            end
+
+        else 
+            if ismember(i, objStageStatus_completed)
+                
+                s.unloadDataset;
+                s.outputRow(stage_next);
+                prev_files = prev_files + 1;
+            else
+                
+                s.unloadDataset;
+                s.outputRow('error');
+                skip_files = skip_files + 1;
+            end
+        end
+
+
+        
+        switch flag
+            case 0
+                obj.sub(i) = s; 
+                i = i + 1; 
+            case 1
+                
+                obj.msgout('Redo subject selected.');
+                s = [];
+            case 2 
+
+                mm('Save work in progress...');
+                break;
+        end
+
+        %         if flag == 1  % do not increment "i" counter if redo
+        %
+        %         else
+        %             obj.sub(i) = s;  % apply changes to persistant object
+        %             i = i + 1;   % increment counter
+        %         end
+    end
+end
+
+
+mc(sprintf('\nSummary'));
+mm(sprintf('\nFiles Processed: %d', length(objStageStatus)));
+mm(sprintf('Previously Completed Files: %d', prev_files));
+mm(sprintf('Skipped Files: %d', skip_files));
+mm(sprintf('Other Errors: %d', errorchk));
+
+if flag == 2, save_desc = 'in_progress'; else, save_desc = 'Default'; end
+
+%obj.createResultsCsv(obj.sub, stage_next, 'Default');
+obj.createResultsCsv(obj.sub, stage_next, save_desc);
+
+end
+
+%% qualityCheck
+% Check that the duration of the data meets the duration criteria (in seconds) specified for 
+% allowed preprocessing to take place.
+function [QI_pass, QI_msg] = qualityCheck(o, s)
+
+QI_msg = {'SHORT'};
+QI_pass = true;
+
+minimum_duration = 100; 
+
+if s.getDuration < minimum_duration
+    QI_pass = false;
+    QI_msg = QI_msg{1};
+    o.msgout(sprintf('%s: Did not meet minimum duration (%d s).', s.subj_basename, minimum_duration));
+end
+
+end
+
+##### SOURCE END #####
+--></body></html>

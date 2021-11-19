@@ -1,0 +1,130 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Count Strings</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-17"><meta name="DC.source" content="countStrings.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Count Strings</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">countStrings</a></li></ul></div><h2 id="1">Usage</h2><p>str = countStrings( cellArrIn )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: cellArrIn</li></ul></div><div><ul><li>OUTPUTS: str</li></ul></div><p>The function is invoked via an htpPreprocessMaster and the input parameter is a cell array represeting the subjects respective study group folder.  The output is a character array that is composed of text of the groups and their subject count.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright &copy; 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">countStrings</h2><p>Provide the seperated groups of the study and the number of subjects that belong to each group and the number of subjects per group will be counted and displayed via command console to allow user to understand the breakdown of the study subjects.</p><pre class="codeinput"><span class="keyword">function</span> str = countStrings( cellArrIn )
+
+xx = cellArrIn;
+
+a=unique(xx,<span class="string">'stable'</span>);
+b=cellfun(@(x) sum(ismember(xx,x)),a,<span class="string">'un'</span>,0);
+cell2table([a;b]', <span class="string">'VariableNames'</span>, {<span class="string">'Group'</span>, <span class="string">'Count'</span>});
+
+str = sprintf(<span class="string">'\nstudyStructUtilities: CountGroups\n'</span>);
+
+<span class="keyword">for</span> i = 1 : length( a )
+    str = [str  sprintf(<span class="string">'\t%s Count: %d\n'</span>, a{i}, b{i})];
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Count Strings
+%%% Usage
+% str = countStrings( cellArrIn )
+%
+%%% Parameters
+% * INPUTS: cellArrIn
+%
+% * OUTPUTS: str
+%
+% The function is invoked via an htpPreprocessMaster and the input parameter is a cell array represeting the subjects respective 
+% study group folder.  The output is a character array that is composed of 
+% text of the groups and their subject count. 
+%
+%%% Copyright and Contact Information
+%
+% Copyright © 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% countStrings
+% Provide the seperated groups of the study and the number of subjects
+% that belong to each group and the number of subjects per group will be 
+% counted and displayed via command console to allow user to understand the
+% breakdown of the study subjects.
+function str = countStrings( cellArrIn )
+
+xx = cellArrIn;
+
+a=unique(xx,'stable');
+b=cellfun(@(x) sum(ismember(xx,x)),a,'un',0);
+cell2table([a;b]', 'VariableNames', {'Group', 'Count'});
+
+str = sprintf('\nstudyStructUtilities: CountGroups\n');
+
+for i = 1 : length( a )
+    str = [str  sprintf('\t%s Count: %d\n', a{i}, b{i})];
+end
+        
+end
+##### SOURCE END #####
+--></body></html>

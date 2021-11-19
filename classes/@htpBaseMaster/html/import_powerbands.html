@@ -1,0 +1,205 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Import Powerbands</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-01"><meta name="DC.source" content="import_powerbands.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Import Powerbands</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">import_powerbands</a></li></ul></div><h2 id="1">Usage</h2><p>obj = import_powerbands( obj, xmlfile )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj, xmlfile</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><p>The input parameter xmlfile is a configuration xml for the powerbands, and the second optional input parameter if the function is not self-invoked is obj as the htpPreprocessMaster.  The output, if the function is not self-invoked, is the htpPreprocessMaster with power band configuration attributes updated to reflect the bands the user needs for preprocessing.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright &copy; 2020 Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">import_powerbands</h2><p>Obtain the various bands related to the power band types. The various bands are constructed accordingly to default band ranges and special ranges such as 'Six_Band' and 'Seven_Band_Gamma' to be used as needed by the user.</p><pre class="codeinput"><span class="keyword">function</span> obj = import_powerbands( obj, xmlfile )
+
+str = sprintf(<span class="string">'Import from %s'</span>, xmlfile );
+obj.msgout(str, <span class="string">'proc_complete'</span>);
+
+outStr =<span class="string">''</span>;
+
+<span class="keyword">try</span>
+    cfgFilename = fullfile(obj.htpcfg.scriptPath, xmlfile);
+
+    xmldata = ext_xml2struct( cfgFilename );
+
+    PowOptions = xmldata.PowOptions;
+    PowOptions = {PowOptions.Study{:}};
+
+    pl = PowOptions;
+    pl = {};
+    <span class="keyword">for</span> i = 1 : length( PowOptions )
+
+        pl{i,1}  = PowOptions{i}.(<span class="string">'Title'</span>).Text;
+        pl{i,2}  = <span class="string">'Begin Options'</span>;
+
+        f = fields(PowOptions{i}.Bands);
+
+        idx = 3;
+
+        <span class="keyword">for</span> k = 1 : length( f )
+
+            pl{i,idx} = f{k};
+            pl{i,idx+1} = PowOptions{i}.Bands.(f{k}).Text;
+            idx = idx + 2;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+
+    tmpcell = cell(1, length(pl));
+    tmpcell{1,1} = <span class="string">'No preset selected'</span>;
+    tmpcell{1,2} = <span class="string">'Default'</span>;
+    obj.xml_power = [ tmpcell; pl];
+
+    str = sprintf(<span class="string">'%s imported. %d Power Options Loaded.'</span>, xmlfile, size(obj.xml_power,1)-1);
+    obj.msgout(str, <span class="string">'step_complete'</span>);
+
+<span class="keyword">catch</span>
+
+    outStr = sprintf(<span class="string">'ERROR: Preset Import. Check format of %s'</span>, xmlfile);
+    obj.msgout(outStr, <span class="string">'step_error'</span>);
+
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Import Powerbands
+%%% Usage
+%   
+% obj = import_powerbands( obj, xmlfile )
+%
+%%% Parameters
+%
+% * INPUTS: obj, xmlfile
+%
+% * OUTPUTS: obj
+%
+% The input parameter xmlfile is a configuration xml for the powerbands,
+% and the second optional input parameter if the function is not
+% self-invoked is obj as the htpPreprocessMaster.  The output, 
+% if the function is not self-invoked, is the htpPreprocessMaster with 
+% power band configuration attributes updated to reflect the bands the 
+% user needs for preprocessing.
+%
+%%% Copyright and Contact Information
+%
+% Copyright © 2020 Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% import_powerbands
+% Obtain the various bands related to the power band types.
+% The various bands are constructed accordingly to default band ranges and
+% special ranges such as 'Six_Band' and 'Seven_Band_Gamma' to be used as
+% needed by the user.
+function obj = import_powerbands( obj, xmlfile )
+
+str = sprintf('Import from %s', xmlfile );
+obj.msgout(str, 'proc_complete');
+
+outStr ='';
+
+try
+    cfgFilename = fullfile(obj.htpcfg.scriptPath, xmlfile);
+    
+    xmldata = ext_xml2struct( cfgFilename );
+    
+    PowOptions = xmldata.PowOptions;
+    PowOptions = {PowOptions.Study{:}};
+    
+    pl = PowOptions;
+    pl = {};
+    for i = 1 : length( PowOptions )
+       
+        pl{i,1}  = PowOptions{i}.('Title').Text;
+        pl{i,2}  = 'Begin Options';
+        
+        f = fields(PowOptions{i}.Bands);
+        
+        idx = 3;
+        
+        for k = 1 : length( f )
+           
+            pl{i,idx} = f{k};
+            pl{i,idx+1} = PowOptions{i}.Bands.(f{k}).Text;
+            idx = idx + 2;
+        end
+    end
+    
+
+    tmpcell = cell(1, length(pl));
+    tmpcell{1,1} = 'No preset selected';
+    tmpcell{1,2} = 'Default';
+    obj.xml_power = [ tmpcell; pl];
+      
+    str = sprintf('%s imported. %d Power Options Loaded.', xmlfile, size(obj.xml_power,1)-1);
+    obj.msgout(str, 'step_complete');
+    
+catch
+    
+    outStr = sprintf('ERROR: Preset Import. Check format of %s', xmlfile);    
+    obj.msgout(outStr, 'step_error');
+    
+
+end
+##### SOURCE END #####
+--></body></html>

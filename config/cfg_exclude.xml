@@ -1,0 +1,9 @@
+<ExcludeReasons>
+<opt>Excessive Line Noise</opt>
+<opt>Insufficient Data</opt>
+<opt>Excessive Artifact</opt>
+<opt>Misclassified in Study</opt>
+<opt>Excessive Channel noise</opt>
+<opt>Too few components</opt>
+<opt>Other</opt>
+</ExcludeReasons>

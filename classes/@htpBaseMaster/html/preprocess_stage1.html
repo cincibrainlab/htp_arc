@@ -1,0 +1,883 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Stage 1 Preprocessing</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-22"><meta name="DC.source" content="preprocess_stage1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Stage 1 Preprocessing</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact information</a></li><li><a href="#4">preprocess_stage1</a></li><li><a href="#5">createbackup</a></li><li><a href="#6">getmsg</a></li><li><a href="#7">setAssets</a></li><li><a href="#8">importData</a></li><li><a href="#9">net_downgrade</a></li><li><a href="#10">filt_and_resample</a></li><li><a href="#11">check_duration</a></li><li><a href="#12">reref_only</a></li><li><a href="#13">asr_clean</a></li><li><a href="#14">edf_import</a></li></ul></div><h2 id="1">Usage</h2><p>obj = preprocess_stage1( obj )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><p>The optional input, obj if the function is not self-invoked, is the htpPreprocessMaster object. The output, obj if the function is not self-invoked, is the updated htpPreprocessMaster object with information updated regarding the status and details of stage 1 completion of preprocessing.</p><h2 id="3">Copyright and Contact information</h2><p>Copyright &copy; 2020 Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">preprocess_stage1</h2><p>Configure logs to produce needed notifications, warning, and errors to user during stage 1 preprocessing and configure stage specific information to guide preprocessing. Setup stage to start by configuring datasets (channel, user, title, and resample hz), loading all RAW files, performing necessary filtering and resampling, and creating a corresponding result csv for each file. If results are not able to be created, then create backup of post stage 1 data to retain completed stage 1 work.</p><pre class="codeinput"><span class="keyword">function</span> obj = preprocess_stage1( obj )
+obj.reset_msg_log;
+[mc, mm, mw] = obj.tools_log;
+mc(getmsg(obj, 1));
+
+stage_last = <span class="string">'raw'</span>;
+stage_next = <span class="string">'import'</span>;
+opt        = obj.formatOptions;
+
+fnlist     = obj.fnlist;
+flength    = length(fnlist);
+obj.htpcfg.xmax_arr = [];
+
+arrayfun( @(s) setAssets( obj, s ), obj.sub, <span class="string">'uni'</span>, 0);
+
+is_edf = strcmp(obj.htpcfg.chanNow.net_name, <span class="string">'EDFGENERIC'</span>);
+
+mc(getmsg(obj, 2));
+mc(getmsg(obj, 3));
+mc(getmsg(obj, 4));
+mc(getmsg(obj, 5));
+
+<span class="keyword">if</span> ~(is_edf)
+    totalsubs = length( obj.sub );
+    sub = obj.sub;
+<span class="keyword">else</span>
+<span class="comment">% %     sub(1:length(obj.sub)*3) = eegDataClass();</span>
+<span class="comment">% %     num_Subs = length(obj.sub);</span>
+<span class="comment">% %     for i=1:length(obj.sub)</span>
+<span class="comment">% %         sub(i) = obj.sub(i);</span>
+<span class="comment">% %         sub((i*2)+num_Subs-1) = eegDataClass();</span>
+<span class="comment">% %         sub((i*2)+num_Subs) = eegDataClass();</span>
+<span class="comment">% %         setAssets(obj,sub((i*2)+num_Subs-1));</span>
+<span class="comment">% %         setAssets(obj,sub((i*2)+num_Subs));</span>
+<span class="comment">% %     end</span>
+<span class="comment">%     totalsubs = length( sub );</span>
+      totalsubs = length( obj.sub );
+      sub = obj.sub;
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> ~(is_edf)
+    <span class="keyword">for</span> i = 1 : totalsubs
+        s = sub(i);
+        importData( obj, s );
+    <span class="keyword">end</span>
+<span class="keyword">else</span>
+    <span class="comment">%for i = 1:num_Subs</span>
+    <span class="keyword">for</span> i=1:totalsubs
+        s = sub(i);
+        importData( obj, s );
+        <span class="comment">%s.loadDataset('import');</span>
+        <span class="comment">%s.averageRefData;</span>
+        <span class="comment">%reref_only(obj,s);</span>
+        <span class="comment">%s.convertBipolarMontage;</span>
+        <span class="comment">%edf_import(obj.htpcfg,s,sub((i*2)+num_Subs-1), sub((i*2)+num_Subs));</span>
+        obj.htpcfg.xmax_arr(end) = s.EEG.xmax;
+<span class="comment">%         s.storeDataset( s.EEG, ...</span>
+<span class="comment">%             obj.htpcfg.pathdb.('import'), ...</span>
+<span class="comment">%             s.subj_subfolder, ...</span>
+<span class="comment">%             s.filename.( 'import' ) );</span>
+<span class="comment">%         s.unloadDataset;</span>
+<span class="comment">%         s.outputRow( 'import' );</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+mc(getmsg(obj, 6));
+
+valid_idx = check_duration( obj, sub );
+
+<span class="keyword">if</span> strcmpi(opt.cleanmode, <span class="string">'ASR'</span>)
+    <span class="keyword">for</span> i = 1 : length(valid_idx)
+        idx = valid_idx(i);
+        s = sub(idx);
+        asr_clean(obj, s, 2);
+    <span class="keyword">end</span>
+<span class="keyword">else</span>
+   <span class="comment">% reref_only( obj, s )</span>
+<span class="keyword">end</span>
+
+obj.sub = sub;
+clear <span class="string">sub</span>;
+
+<span class="keyword">try</span>
+    obj.createResultsCsv(obj.sub, stage_next,<span class="string">'Default'</span>);
+<span class="keyword">catch</span>
+    htps1_backup = createbackup( obj, stage_next );
+    assignin(<span class="string">'base'</span>, <span class="string">'htps1_backup'</span>, htps1_backup);
+    <span class="keyword">try</span>
+        save(fullfile(obj.htpcfg.pathdb.analysis, [<span class="string">'backup_'</span> obj.htpcfg.timetag2 <span class="string">'.mat'</span>]), <span class="string">'htps1_backup'</span>);
+    <span class="keyword">catch</span>
+        obj.msgout(<span class="string">'Check folder or reload to create directories.'</span>, <span class="string">'step_error'</span>);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><h2 id="5">createbackup</h2><p>Creates backup of object to be utilized for reprocessing if the initial processing does not successfully complete</p><pre class="codeinput"><span class="keyword">function</span> backup = createbackup( obj, stage_next )
+backup.obj = obj;
+backup.stage_next = stage_next;
+
+<span class="keyword">end</span>
+</pre><h2 id="6">getmsg</h2><p>Produces the stage related information that may be of interest to the user The command console will display this appropriate information.</p><pre class="codeinput"><span class="keyword">function</span> str = getmsg(obj, index )
+sf = @sprintf;
+
+opt = obj.formatOptions;
+
+msg{1} = sf(<span class="string">'version: htp2020v1\nStarting Stage 1: Import Raw Files...'</span>);
+msg{2} = sf(<span class="string">'Assign Electrode System: %s'</span>, obj.htpcfg.chanNow.net_name);
+msg{3} = sf(<span class="string">'User: %s'</span>, obj.htpcfg.user);
+msg{4} = sf(<span class="string">'Study Title: %s'</span>, obj.study_title);
+msg{5} = sf(<span class="string">'Set Resample Rate: %d'</span>, opt.srate);
+msg{6} = <span class="string">'Convert RAW data to EEGLAB datasets.'</span>;
+
+str = msg{index};
+
+<span class="keyword">end</span>
+</pre><h2 id="7">setAssets</h2><p>Configures the information needed for stage 1 preprocessing epr subject such as channel files, user, study title, resampling rate, and gui-set options</p><pre class="codeinput"><span class="keyword">function</span> s = setAssets(obj, s)
+opt = obj.formatOptions;
+
+s.setElectrodeSystem( obj.htpcfg.chanNow );
+s.setUser(obj.htpcfg.user);
+s.changeStudyTitle(obj.study_title);
+s.setResampleRate( opt.srate );
+s.setopt( opt );
+
+<span class="keyword">end</span>
+</pre><h2 id="8">importData</h2><p>imports the subject data and performs the necessary steps of filtering, resampling, and downgrading, as needed.  Then stores updated data and configurations for later use in preprocessing.</p><pre class="codeinput"><span class="keyword">function</span> s = importData( obj, s )
+stage_next = <span class="string">'import'</span>;
+opt = obj.formatOptions;
+
+s.getRawData;                                    <span class="comment">% import data (biosig)</span>
+
+s = filt_and_resample( obj, s, opt );            <span class="comment">% filter, resample</span>
+
+<span class="keyword">if</span> strcmpi(opt.netdowngrade, <span class="string">'EGI128-&gt;EGI32'</span>)
+    s = net_downgrade( obj, s, opt ); <span class="keyword">end</span>        <span class="comment">% downgrade all 128 nets to 32</span>
+
+<span class="comment">% if ~(strcmp(obj.htpcfg.chanNow.net_name, 'EDFGENERIC'))</span>
+<span class="comment">%     s.storeDataset( s.EEG, ...</span>
+<span class="comment">%             obj.htpcfg.pathdb.(stage_next), ...</span>
+<span class="comment">%             s.subj_subfolder, ...</span>
+<span class="comment">%             s.filename.( stage_next ) );</span>
+<span class="comment">%</span>
+<span class="comment">%     s.unloadDataset;</span>
+<span class="comment">% end</span>
+
+s.storeDataset( s.EEG, <span class="keyword">...</span>
+            obj.htpcfg.pathdb.(stage_next), <span class="keyword">...</span>
+            s.subj_subfolder, <span class="keyword">...</span>
+            s.filename.( stage_next ) );
+
+s.unloadDataset;
+
+s.outputRow( stage_next );
+obj.update_htpcfg( s );
+
+<span class="keyword">end</span>
+</pre><h2 id="9">net_downgrade</h2><p>Perform downgrade to obtain ideal electrode configuration per user need specified via gui prior to start of stage 1 preprocessing</p><pre class="codeinput"><span class="keyword">function</span> s = net_downgrade( obj, s, opt )
+<span class="keyword">if</span> length(s.EEG.chanlocs) == 128 &amp;&amp; strcmp(s.net_name, <span class="string">'EGI128'</span>)
+
+    searchChanInfo = {obj.htpcfg.chaninfo.net_displayname};
+    chanInfoIdx = strcmpi(<span class="string">'EGI Hydrocel 32'</span>, searchChanInfo);
+
+    obj.htpcfg.chanNow = obj.htpcfg.chaninfo(chanInfoIdx);
+    s.setElectrodeSystem( obj.htpcfg.chanNow )
+    s.eeglab128to32;
+    obj.setElecNow(<span class="string">'EGI32'</span>);
+
+<span class="keyword">end</span>
+
+<span class="comment">% TODO add other net conversions</span>
+
+<span class="keyword">end</span>
+</pre><h2 id="10">filt_and_resample</h2><p>Perform necessary filtering and resampling of data per user need specified via gui setting prior to stage 1 preprocessing.</p><pre class="codeinput"><span class="keyword">function</span> s = filt_and_resample( obj, s, opt )
+
+
+lowcut_on       = true;
+highcut_on      = true;
+notch_on        = true;
+cleanline_on    = false;
+
+<span class="keyword">if</span> s.proc_sRate_raw &gt; 2000
+    s.resampleData( 1000 );
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> isnan(opt.highcutoff), highcut_on = false;
+<span class="keyword">else</span>
+    <span class="keyword">if</span> opt.highcutoff &lt; opt.notch(2); notch_on = false;
+        str = sprintf(<span class="string">'\n%s: Low pass filter below notch. Notch filter not performed.'</span>, s.subj_basename);
+        s.msgout(str, <span class="string">'proc_warning'</span>);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> strcmpi(opt.cleanline, <span class="string">'Enabled'</span>), notch_on = false; cleanline_on= true; <span class="keyword">end</span>
+
+<span class="keyword">if</span> lowcut_on,   s.filtHandler(  <span class="string">'lowcutoff'</span>, opt.lowcutoff ); <span class="keyword">end</span>
+<span class="keyword">if</span> highcut_on, s.filtHandler(  <span class="string">'highcutoff'</span>, opt.highcutoff ); <span class="keyword">end</span>
+<span class="keyword">if</span> notch_on &amp;&amp; ~strcmp(obj.htpcfg.optnow.Stage1_Notch1,<span class="string">'none'</span>),    s.filtHandler(  <span class="string">'notch'</span>, [opt.notch(1) opt.notch(2)] ); <span class="keyword">end</span>
+<span class="keyword">if</span> cleanline_on, s.filtHandler( <span class="string">'cleanline'</span> ); <span class="keyword">end</span>
+
+s.resampleData;
+
+obj.htpcfg.xmax_arr(end+1) = s.EEG.xmax;
+
+<span class="keyword">end</span>
+</pre><h2 id="11">check_duration</h2><p>Marks certain files that are too small (meaning 2 std below the mean in this case) and makes sure to ignore the files during the stage 1 preprocessing step.</p><pre class="codeinput"><span class="keyword">function</span> valid_idx = check_duration( obj, sub )
+xmax_arr = obj.htpcfg.xmax_arr;
+
+minsize = floor(mean(xmax_arr) - std(xmax_arr)*2);
+valid_idx  = false(1, length(sub));
+
+<span class="keyword">for</span> i = 1 : length(sub)
+    sub(i).loadDataset(<span class="string">'import'</span>);
+    currentsize = sub(i).EEG.xmax;
+
+    <span class="keyword">if</span> currentsize &lt; minsize
+        str = sprintf(<span class="string">'File Index %d: %s (%d secs)rejected based on min. length of %d.'</span>, i, obj.sub(i).subj_basename, floor( currentsize ), minsize);
+        obj.msgout(str,<span class="string">'step_warning'</span>);
+        sub(i).proc_state = <span class="string">'SHORT'</span>;
+    <span class="keyword">else</span>
+        valid_idx(i) = 1;
+    <span class="keyword">end</span>
+    sub(i).unloadDataset;
+<span class="keyword">end</span>
+
+valid_idx = find(valid_idx);
+
+<span class="keyword">end</span>
+</pre><h2 id="12">reref_only</h2><p>Rereferencing EEG data as needed per user requirement</p><pre class="codeinput"><span class="keyword">function</span> reref_only( obj, s )
+
+stage_next = <span class="string">'import'</span>;
+
+s.loadDataset(<span class="string">'import'</span>);
+s.averageRefData;
+s.storeDataset( s.EEG, <span class="keyword">...</span>
+    obj.htpcfg.pathdb.(stage_next), <span class="keyword">...</span>
+    s.subj_subfolder, <span class="keyword">...</span>
+    s.filename.( stage_next ) );
+
+s.outputRow( stage_next );
+obj.update_htpcfg( s );
+s.unloadDataset;
+
+<span class="keyword">end</span>
+</pre><h2 id="13">asr_clean</h2><p>Update per Makoto's recs <a href="https://bit.ly/2m1FzHI">https://bit.ly/2m1FzHI</a> * optional and active in htp2020 on * -&gt; ASR chan. clean only -&gt; interpolate -&gt; re-ref -&gt; ASR -&gt; reref Perform interpolation and manual continuous cleaning for channels and proceed depending on user's need in terms of mode of method: mode: 1 - ASR channel only; 2 - ASR only; 3 - Outlier channel;     4 - ASR both; 5 - Outlier + ASR mode 1 and 3 being performed for stage 1 channel and then mode 2, 3, and 5 being performed for stage 2 burst correction.</p><pre class="codeinput"><span class="keyword">function</span> asr_clean(obj, s, mode)
+stage_next = <span class="string">'import'</span>;
+s.loadDataset(<span class="string">'import'</span>);
+
+s = obj.tool_manualChanClean( s );
+
+<span class="keyword">if</span> mode == 1 || mode == 3
+
+    obj.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
+    obj.htpcfg.asr_param.arg_burst = -1;
+    obj.htpcfg.asr_param.arg_window = -1;
+
+    s.asrData( obj.htpcfg.asr_param );
+    s.averageRefData;
+
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> mode == 4 || mode == 5
+<span class="comment">%TODO</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> mode == 2 || mode == 3 || mode == 5
+
+    obj.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
+    obj.htpcfg.asr_param.arg_channel = -1;
+    obj.htpcfg.asr_param.arg_flatline = -1;
+    obj.htpcfg.asr_param.arg_highpass = -1;
+    obj.htpcfg.asr_param.arg_noisy = -1;
+
+    s.asrData( obj.htpcfg.asr_param );
+
+    s.averageRefData;
+
+    obj.msgout(<span class="string">'\nRe-Reference 2 | Average'</span>,<span class="string">'step_complete'</span>);
+
+    obj.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
+
+<span class="keyword">end</span>
+
+s.storeDataset( s.EEG, <span class="keyword">...</span>
+    obj.htpcfg.pathdb.(stage_next), <span class="keyword">...</span>
+    s.subj_subfolder, <span class="keyword">...</span>
+    s.filename.( stage_next ) );
+
+s.outputRow( stage_next );
+obj.update_htpcfg( s );
+s.unloadDataset;
+
+<span class="keyword">end</span>
+</pre><h2 id="14">edf_import</h2><p>Secondary importing of edf data, and splitting the initial dataset into three segments to preserve memory and speed up preprocessing time for manual cleaning, etc. First subject object represents first ten minutes of initial file, second subject objet represents 10 minutes at halfway point of initial file, and finally third subject object represents last 10 minutes of initial file.</p><pre class="codeinput"><span class="keyword">function</span> edf_import(htpcfg,s,edf_SecondSub,edf_ThirdSub)
+    edf_SecondSub.EEG = eeg_emptyset;
+    edf_SecondSub.subj_basename = [s.subj_basename <span class="string">'_F'</span>];
+    edf_SecondSub.createFileNames;
+    edf_SecondSub.setHtpCfg(htpcfg);
+    edf_SecondSub.updatePaths(htpcfg.basePath);
+    edf_SecondSub.setTimeTag(htpcfg.timetag2);
+    edf_SecondSub.subj_subfolder = s.subj_subfolder;
+    edf_SecondSub.EEG.data = s.EEG.data(:,(1+s.EEG.pnts/3):((s.EEG.pnts/3)*2));
+    edf_SecondSub.EEG.times = s.EEG.times((1+s.EEG.pnts/3):((s.EEG.pnts/3)*2));
+    edf_SecondSub.EEG.pnts = size(edf_SecondSub.EEG.data,2);
+    edf_SecondSub.EEG.srate = s.EEG.srate;
+    edf_SecondSub.proc_xmax_raw = s.proc_xmax_raw;
+    edf_SecondSub.proc_sRate_raw = s.proc_sRate_raw;
+    edf_SecondSub.proc_filt_lowcutoff = s.proc_filt_lowcutoff;
+    edf_SecondSub.proc_filt_highcutoff = s.proc_filt_highcutoff;
+    edf_SecondSub.EEG.chanlocs = s.EEG.chanlocs;
+    edf_SecondSub.EEG.nbchan = s.EEG.nbchan;
+    edf_SecondSub.EEG = eeg_checkset(edf_SecondSub.EEG);
+    edf_SecondSub.EEG = eeg_checkchanlocs(edf_SecondSub.EEG);
+    edf_SecondSub.net_nbchan_orig = s.net_nbchan_orig;
+    edf_SecondSub.outputRow(<span class="string">'import'</span>);
+    edf_SecondSub.storeDataset( edf_SecondSub.EEG, <span class="keyword">...</span>
+     htpcfg.pathdb.(<span class="string">'import'</span>), <span class="keyword">...</span>
+     edf_SecondSub.subj_subfolder, <span class="keyword">...</span>
+     edf_SecondSub.filename.( <span class="string">'import'</span> ) );
+
+    edf_ThirdSub.subj_basename = [s.subj_basename <span class="string">'_A'</span>];
+    edf_ThirdSub.EEG = eeg_emptyset;
+    edf_ThirdSub.createFileNames;
+    edf_ThirdSub.setHtpCfg(htpcfg);
+    edf_ThirdSub.updatePaths(htpcfg.basePath);
+    edf_ThirdSub.setTimeTag(htpcfg.timetag2);
+    edf_ThirdSub.subj_subfolder = s.subj_subfolder;
+    edf_ThirdSub.EEG.data = s.EEG.data(:,(s.EEG.pnts/3*2)+1:end);
+    edf_ThirdSub.EEG.times = s.EEG.times((s.EEG.pnts/3*2)+1:end);
+    edf_ThirdSub.EEG.pnts = size(edf_ThirdSub.EEG.data,2);
+    edf_ThirdSub.EEG.srate = s.EEG.srate;
+    edf_ThirdSub.proc_xmax_raw = s.proc_xmax_raw;
+    edf_ThirdSub.proc_sRate_raw = s.proc_sRate_raw;
+    edf_ThirdSub.proc_filt_lowcutoff = s.proc_filt_lowcutoff;
+    edf_ThirdSub.proc_filt_highcutoff = s.proc_filt_highcutoff;
+    edf_ThirdSub.EEG.chanlocs = s.EEG.chanlocs;
+    edf_ThirdSub.EEG.nbchan = s.EEG.nbchan;
+    edf_ThirdSub.EEG = eeg_checkset(edf_ThirdSub.EEG);
+    edf_ThirdSub.EEG = eeg_checkchanlocs(edf_ThirdSub.EEG);
+    edf_ThirdSub.net_nbchan_orig = s.net_nbchan_orig;
+    edf_ThirdSub.outputRow(<span class="string">'import'</span>);
+    edf_ThirdSub.storeDataset( edf_ThirdSub.EEG, <span class="keyword">...</span>
+     htpcfg.pathdb.(<span class="string">'import'</span>), <span class="keyword">...</span>
+     edf_ThirdSub.subj_subfolder, <span class="keyword">...</span>
+     edf_ThirdSub.filename.( <span class="string">'import'</span> ) );
+
+
+    s.subj_basename = [s.subj_basename <span class="string">'_D'</span>];
+    s.createFileNames;
+    s.EEG.data = s.EEG.data(:,1:s.EEG.pnts/3);
+    <span class="comment">%s.EEG.pnts = s.EEG.pnts/3;</span>
+    s.EEG.pnts = size(s.EEG.data,2);
+    s.EEG = eeg_checkset(s.EEG);
+    s.outputRow(<span class="string">'import'</span>);
+    s.storeDataset( s.EEG, <span class="keyword">...</span>
+     htpcfg.pathdb.(<span class="string">'import'</span>), <span class="keyword">...</span>
+     s.subj_subfolder, <span class="keyword">...</span>
+     s.filename.( <span class="string">'import'</span> ) );
+
+    edf_SecondSub.unloadDataset;
+    edf_ThirdSub.unloadDataset;
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Stage 1 Preprocessing
+%%% Usage
+% obj = preprocess_stage1( obj )
+%
+%%% Parameters
+%
+% * INPUTS: obj
+%  
+% * OUTPUTS: obj
+%
+% The optional input, obj if the function is not self-invoked, is the 
+% htpPreprocessMaster object.  
+% The output, obj if the function is not self-invoked, is the updated 
+% htpPreprocessMaster object with information updated regarding the status 
+% and details of stage 1 completion of preprocessing.
+%
+%%% Copyright and Contact information
+% Copyright © 2020 Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+%
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+%
+% Contact: ernest.pedapati@cchmc.org
+
+%%  preprocess_stage1
+% Configure logs to produce needed notifications, warning, and errors to
+% user during stage 1 preprocessing and configure stage specific information
+% to guide preprocessing.
+% Setup stage to start by configuring datasets (channel, user, title, and resample hz),
+% loading all RAW files, performing necessary filtering and resampling, 
+% and creating a corresponding result csv for each file. If results are not able to be created,
+% then create backup of post stage 1 data to retain completed stage 1 work.
+
+function obj = preprocess_stage1( obj )
+obj.reset_msg_log;                      
+[mc, mm, mw] = obj.tools_log;           
+mc(getmsg(obj, 1));                     
+
+stage_last = 'raw';
+stage_next = 'import';
+opt        = obj.formatOptions;         
+
+fnlist     = obj.fnlist;                
+flength    = length(fnlist);
+obj.htpcfg.xmax_arr = [];
+
+arrayfun( @(s) setAssets( obj, s ), obj.sub, 'uni', 0);
+
+is_edf = strcmp(obj.htpcfg.chanNow.net_name, 'EDFGENERIC');
+
+mc(getmsg(obj, 2));                     
+mc(getmsg(obj, 3));                     
+mc(getmsg(obj, 4));                     
+mc(getmsg(obj, 5));                     
+
+if ~(is_edf)
+    totalsubs = length( obj.sub );
+    sub = obj.sub;
+else
+% %     sub(1:length(obj.sub)*3) = eegDataClass(); 
+% %     num_Subs = length(obj.sub);
+% %     for i=1:length(obj.sub) 
+% %         sub(i) = obj.sub(i);
+% %         sub((i*2)+num_Subs-1) = eegDataClass(); 
+% %         sub((i*2)+num_Subs) = eegDataClass();
+% %         setAssets(obj,sub((i*2)+num_Subs-1));
+% %         setAssets(obj,sub((i*2)+num_Subs));
+% %     end
+%     totalsubs = length( sub );
+      totalsubs = length( obj.sub );
+      sub = obj.sub;
+end
+
+if ~(is_edf)
+    for i = 1 : totalsubs
+        s = sub(i); 
+        importData( obj, s );
+    end
+else
+    %for i = 1:num_Subs
+    for i=1:totalsubs
+        s = sub(i); 
+        importData( obj, s );
+        %s.loadDataset('import');
+        %s.averageRefData;
+        %reref_only(obj,s);
+        %s.convertBipolarMontage;
+        %edf_import(obj.htpcfg,s,sub((i*2)+num_Subs-1), sub((i*2)+num_Subs));
+        obj.htpcfg.xmax_arr(end) = s.EEG.xmax;
+%         s.storeDataset( s.EEG, ...
+%             obj.htpcfg.pathdb.('import'), ...
+%             s.subj_subfolder, ...
+%             s.filename.( 'import' ) );
+%         s.unloadDataset;
+%         s.outputRow( 'import' );
+    end
+end
+
+mc(getmsg(obj, 6));                     
+
+valid_idx = check_duration( obj, sub );
+
+if strcmpi(opt.cleanmode, 'ASR')
+    for i = 1 : length(valid_idx)        
+        idx = valid_idx(i);
+        s = sub(idx);        
+        asr_clean(obj, s, 2);
+    end
+else
+   % reref_only( obj, s )
+end
+
+obj.sub = sub;
+clear sub;
+
+try
+    obj.createResultsCsv(obj.sub, stage_next,'Default');
+catch
+    htps1_backup = createbackup( obj, stage_next );
+    assignin('base', 'htps1_backup', htps1_backup);
+    try
+        save(fullfile(obj.htpcfg.pathdb.analysis, ['backup_' obj.htpcfg.timetag2 '.mat']), 'htps1_backup');
+    catch
+        obj.msgout('Check folder or reload to create directories.', 'step_error');
+    end
+end
+
+end
+
+%%  createbackup
+% Creates backup of object to be utilized for reprocessing if the initial
+% processing does not successfully complete
+function backup = createbackup( obj, stage_next )
+backup.obj = obj;
+backup.stage_next = stage_next;
+
+end
+
+%%  getmsg
+% Produces the stage related information that may be of interest to the user
+% The command console will display this appropriate information.
+function str = getmsg(obj, index )
+sf = @sprintf;
+
+opt = obj.formatOptions;
+
+msg{1} = sf('version: htp2020v1\nStarting Stage 1: Import Raw Files...');
+msg{2} = sf('Assign Electrode System: %s', obj.htpcfg.chanNow.net_name);
+msg{3} = sf('User: %s', obj.htpcfg.user);
+msg{4} = sf('Study Title: %s', obj.study_title);
+msg{5} = sf('Set Resample Rate: %d', opt.srate);
+msg{6} = 'Convert RAW data to EEGLAB datasets.';
+
+str = msg{index};
+
+end
+
+%%  setAssets
+% Configures the information needed for stage 1 preprocessing epr subject
+% such as channel files, user, study title, resampling rate, and gui-set
+% options
+function s = setAssets(obj, s)
+opt = obj.formatOptions;
+
+s.setElectrodeSystem( obj.htpcfg.chanNow );     
+s.setUser(obj.htpcfg.user);                     
+s.changeStudyTitle(obj.study_title);            
+s.setResampleRate( opt.srate );                 
+s.setopt( opt );                               
+
+end
+
+%%  importData
+% imports the subject data and performs the necessary steps of filtering,
+% resampling, and downgrading, as needed.  Then stores updated data and
+% configurations for later use in preprocessing.
+function s = importData( obj, s )
+stage_next = 'import';
+opt = obj.formatOptions;
+
+s.getRawData;                                    % import data (biosig)
+
+s = filt_and_resample( obj, s, opt );            % filter, resample
+
+if strcmpi(opt.netdowngrade, 'EGI128->EGI32')
+    s = net_downgrade( obj, s, opt ); end        % downgrade all 128 nets to 32
+
+% if ~(strcmp(obj.htpcfg.chanNow.net_name, 'EDFGENERIC'))
+%     s.storeDataset( s.EEG, ...
+%             obj.htpcfg.pathdb.(stage_next), ...
+%             s.subj_subfolder, ...
+%             s.filename.( stage_next ) );
+%         
+%     s.unloadDataset;
+% end
+
+s.storeDataset( s.EEG, ...
+            obj.htpcfg.pathdb.(stage_next), ...
+            s.subj_subfolder, ...
+            s.filename.( stage_next ) );
+        
+s.unloadDataset;
+
+s.outputRow( stage_next );
+obj.update_htpcfg( s );
+
+end
+
+%%  net_downgrade
+% Perform downgrade to obtain ideal electrode configuration
+% per user need specified via gui prior to start of stage 1 preprocessing
+function s = net_downgrade( obj, s, opt )
+if length(s.EEG.chanlocs) == 128 && strcmp(s.net_name, 'EGI128')
+    
+    searchChanInfo = {obj.htpcfg.chaninfo.net_displayname};
+    chanInfoIdx = strcmpi('EGI Hydrocel 32', searchChanInfo);
+    
+    obj.htpcfg.chanNow = obj.htpcfg.chaninfo(chanInfoIdx);
+    s.setElectrodeSystem( obj.htpcfg.chanNow )
+    s.eeglab128to32;
+    obj.setElecNow('EGI32'); 
+    
+end
+
+% TODO add other net conversions
+
+end
+
+%%  filt_and_resample
+% Perform necessary filtering and resampling of data per user need
+% specified via gui setting prior to stage 1 preprocessing.
+function s = filt_and_resample( obj, s, opt )
+
+
+lowcut_on       = true;
+highcut_on      = true;
+notch_on        = true;
+cleanline_on    = false;
+
+if s.proc_sRate_raw > 2000
+    s.resampleData( 1000 );
+end
+
+if isnan(opt.highcutoff), highcut_on = false;
+else
+    if opt.highcutoff < opt.notch(2); notch_on = false;
+        str = sprintf('\n%s: Low pass filter below notch. Notch filter not performed.', s.subj_basename);
+        s.msgout(str, 'proc_warning');
+    end
+end
+
+if strcmpi(opt.cleanline, 'Enabled'), notch_on = false; cleanline_on= true; end
+
+if lowcut_on,   s.filtHandler(  'lowcutoff', opt.lowcutoff ); end
+if highcut_on, s.filtHandler(  'highcutoff', opt.highcutoff ); end
+if notch_on && ~strcmp(obj.htpcfg.optnow.Stage1_Notch1,'none'),    s.filtHandler(  'notch', [opt.notch(1) opt.notch(2)] ); end
+if cleanline_on, s.filtHandler( 'cleanline' ); end
+
+s.resampleData;
+
+obj.htpcfg.xmax_arr(end+1) = s.EEG.xmax;
+
+end
+
+%%  check_duration
+% Marks certain files that are too small (meaning 2 std below the mean in this case)
+% and makes sure to ignore the files during the stage 1 preprocessing step.
+function valid_idx = check_duration( obj, sub ) 
+xmax_arr = obj.htpcfg.xmax_arr;
+
+minsize = floor(mean(xmax_arr) - std(xmax_arr)*2);
+valid_idx  = false(1, length(sub));
+
+for i = 1 : length(sub)
+    sub(i).loadDataset('import');
+    currentsize = sub(i).EEG.xmax;
+    
+    if currentsize < minsize
+        str = sprintf('File Index %d: %s (%d secs)rejected based on min. length of %d.', i, obj.sub(i).subj_basename, floor( currentsize ), minsize);
+        obj.msgout(str,'step_warning');
+        sub(i).proc_state = 'SHORT';
+    else
+        valid_idx(i) = 1;
+    end
+    sub(i).unloadDataset;
+end
+
+valid_idx = find(valid_idx);
+
+end
+
+%%  reref_only
+% Rereferencing EEG data as needed per user requirement
+function reref_only( obj, s )
+
+stage_next = 'import';
+
+s.loadDataset('import');
+s.averageRefData;
+s.storeDataset( s.EEG, ...
+    obj.htpcfg.pathdb.(stage_next), ...
+    s.subj_subfolder, ...
+    s.filename.( stage_next ) );
+
+s.outputRow( stage_next );
+obj.update_htpcfg( s );
+s.unloadDataset;
+
+end
+
+%%  asr_clean
+% Update per Makoto's recs <https://bit.ly/2m1FzHI>
+% * optional and active in htp2020 on *
+% -> ASR chan. clean only -> interpolate -> re-ref -> ASR -> reref
+% Perform interpolation and manual continuous cleaning for channels
+% and proceed depending on user's need in terms of mode of method: 
+% mode: 1 - ASR channel only; 2 - ASR only; 3 - Outlier channel; 
+%     4 - ASR both; 5 - Outlier + ASR
+% mode 1 and 3 being performed for stage 1 channel and then mode 2, 3, and 5
+% being performed for stage 2 burst correction.
+function asr_clean(obj, s, mode)
+stage_next = 'import';
+s.loadDataset('import');
+
+s = obj.tool_manualChanClean( s );
+
+if mode == 1 || mode == 3
+    
+    obj.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
+    obj.htpcfg.asr_param.arg_burst = -1;
+    obj.htpcfg.asr_param.arg_window = -1;
+    
+    s.asrData( obj.htpcfg.asr_param );
+    s.averageRefData;
+    
+end
+
+if mode == 4 || mode == 5
+%TODO    
+end
+
+if mode == 2 || mode == 3 || mode == 5    
+    
+    obj.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
+    obj.htpcfg.asr_param.arg_channel = -1;
+    obj.htpcfg.asr_param.arg_flatline = -1;
+    obj.htpcfg.asr_param.arg_highpass = -1;
+    obj.htpcfg.asr_param.arg_noisy = -1;
+    
+    s.asrData( obj.htpcfg.asr_param );  
+    
+    s.averageRefData;                   
+    
+    obj.msgout('\nRe-Reference 2 | Average','step_complete');
+    
+    obj.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
+    
+end
+
+s.storeDataset( s.EEG, ...
+    obj.htpcfg.pathdb.(stage_next), ...
+    s.subj_subfolder, ...
+    s.filename.( stage_next ) );
+
+s.outputRow( stage_next );
+obj.update_htpcfg( s );
+s.unloadDataset;
+
+end
+
+%% edf_import
+% Secondary importing of edf data, and splitting the initial dataset into
+% three segments to preserve memory and speed up preprocessing time for
+% manual cleaning, etc.
+% First subject object represents first ten minutes of initial file,
+% second subject objet represents 10 minutes at halfway point of initial file, 
+% and finally third subject object represents last 10 minutes of initial file.
+function edf_import(htpcfg,s,edf_SecondSub,edf_ThirdSub)
+    edf_SecondSub.EEG = eeg_emptyset;
+    edf_SecondSub.subj_basename = [s.subj_basename '_F'];
+    edf_SecondSub.createFileNames;
+    edf_SecondSub.setHtpCfg(htpcfg);
+    edf_SecondSub.updatePaths(htpcfg.basePath);
+    edf_SecondSub.setTimeTag(htpcfg.timetag2);
+    edf_SecondSub.subj_subfolder = s.subj_subfolder;
+    edf_SecondSub.EEG.data = s.EEG.data(:,(1+s.EEG.pnts/3):((s.EEG.pnts/3)*2));
+    edf_SecondSub.EEG.times = s.EEG.times((1+s.EEG.pnts/3):((s.EEG.pnts/3)*2));
+    edf_SecondSub.EEG.pnts = size(edf_SecondSub.EEG.data,2);
+    edf_SecondSub.EEG.srate = s.EEG.srate;
+    edf_SecondSub.proc_xmax_raw = s.proc_xmax_raw;
+    edf_SecondSub.proc_sRate_raw = s.proc_sRate_raw;
+    edf_SecondSub.proc_filt_lowcutoff = s.proc_filt_lowcutoff;
+    edf_SecondSub.proc_filt_highcutoff = s.proc_filt_highcutoff;
+    edf_SecondSub.EEG.chanlocs = s.EEG.chanlocs;
+    edf_SecondSub.EEG.nbchan = s.EEG.nbchan;
+    edf_SecondSub.EEG = eeg_checkset(edf_SecondSub.EEG);
+    edf_SecondSub.EEG = eeg_checkchanlocs(edf_SecondSub.EEG);
+    edf_SecondSub.net_nbchan_orig = s.net_nbchan_orig;
+    edf_SecondSub.outputRow('import');
+    edf_SecondSub.storeDataset( edf_SecondSub.EEG, ...
+     htpcfg.pathdb.('import'), ...
+     edf_SecondSub.subj_subfolder, ...
+     edf_SecondSub.filename.( 'import' ) );
+
+    edf_ThirdSub.subj_basename = [s.subj_basename '_A'];
+    edf_ThirdSub.EEG = eeg_emptyset;
+    edf_ThirdSub.createFileNames;
+    edf_ThirdSub.setHtpCfg(htpcfg);
+    edf_ThirdSub.updatePaths(htpcfg.basePath);
+    edf_ThirdSub.setTimeTag(htpcfg.timetag2);
+    edf_ThirdSub.subj_subfolder = s.subj_subfolder;
+    edf_ThirdSub.EEG.data = s.EEG.data(:,(s.EEG.pnts/3*2)+1:end);
+    edf_ThirdSub.EEG.times = s.EEG.times((s.EEG.pnts/3*2)+1:end);
+    edf_ThirdSub.EEG.pnts = size(edf_ThirdSub.EEG.data,2);
+    edf_ThirdSub.EEG.srate = s.EEG.srate;
+    edf_ThirdSub.proc_xmax_raw = s.proc_xmax_raw;
+    edf_ThirdSub.proc_sRate_raw = s.proc_sRate_raw;
+    edf_ThirdSub.proc_filt_lowcutoff = s.proc_filt_lowcutoff;
+    edf_ThirdSub.proc_filt_highcutoff = s.proc_filt_highcutoff;
+    edf_ThirdSub.EEG.chanlocs = s.EEG.chanlocs;
+    edf_ThirdSub.EEG.nbchan = s.EEG.nbchan;
+    edf_ThirdSub.EEG = eeg_checkset(edf_ThirdSub.EEG);
+    edf_ThirdSub.EEG = eeg_checkchanlocs(edf_ThirdSub.EEG);
+    edf_ThirdSub.net_nbchan_orig = s.net_nbchan_orig;
+    edf_ThirdSub.outputRow('import');
+    edf_ThirdSub.storeDataset( edf_ThirdSub.EEG, ...
+     htpcfg.pathdb.('import'), ...
+     edf_ThirdSub.subj_subfolder, ...
+     edf_ThirdSub.filename.( 'import' ) );
+
+ 
+    s.subj_basename = [s.subj_basename '_D'];
+    s.createFileNames;
+    s.EEG.data = s.EEG.data(:,1:s.EEG.pnts/3);
+    %s.EEG.pnts = s.EEG.pnts/3;
+    s.EEG.pnts = size(s.EEG.data,2);
+    s.EEG = eeg_checkset(s.EEG);
+    s.outputRow('import');
+    s.storeDataset( s.EEG, ...
+     htpcfg.pathdb.('import'), ...
+     s.subj_subfolder, ...
+     s.filename.( 'import' ) );
+ 
+    edf_SecondSub.unloadDataset;
+    edf_ThirdSub.unloadDataset;
+end
+
+
+
+##### SOURCE END #####
+--></body></html>

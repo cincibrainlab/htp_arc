@@ -1,0 +1,153 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Set Frequency Table</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-17"><meta name="DC.source" content="setFreqTable.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Set Frequency Table</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">setFreqTable</a></li></ul></div><h2 id="1">Usage</h2><p>obj = setFreqTable(obj, newFreqMat)</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj, newFreqMat</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><p>The input is newFreqMat which is a powerband matrix to determine the obtain the necessary frequency table and the second optional input parameter if the function is not self-invoked obj is the RestEegDataClass object.  The function can be called and passed no input, in which case the default frequency table will be set.  The output, if the function is not self-invoked, is the original RestEegDataClass object passed in with the frequency table attribute updated.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright &copy; 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">setFreqTable</h2><p>Prepare frequency table based on user input, if no user input set the default frequency table for later operations such as points retrieval. Before the frequency table is officially assigned, verification that max frequency is not above nyquist frequency. Returns an error if max above nyquist frequency. The frequency table attribute is assigned for the object to be utilized in further operations such as points retrieval and various analysis methods.</p><pre class="codeinput"><span class="keyword">function</span> obj = setFreqTable( obj, newFreqMat )
+
+    <span class="keyword">if</span> nargin&lt;2
+        newFreqMat = [1,3; 4,7; 8,10; 10,12; 13,30; 30,80]; <span class="comment">% human default P2</span>
+<span class="comment">%                 newFreqMat = [1,4; 4,10; 10,13; 13,30; 30,55; 65,100]; %</span>
+<span class="comment">%                 human modulation index</span>
+<span class="comment">%                 newFreqMat = [1,4; 4,8; 8,13; 13,30; 30,55; 65,100]; % mice</span>
+    <span class="keyword">end</span>
+
+
+
+    EEG = obj.EEG;
+    <span class="keyword">if</span> newFreqMat(end,2) &lt;= EEG.srate/2
+        obj.freqTable = newFreqMat;
+        obj.msgout(<span class="string">'Frequency Table set'</span>, <span class="string">'proc_msg'</span>);
+<span class="comment">%                 disp(obj.freqTable);</span>
+    <span class="keyword">else</span>
+        cprintf(<span class="string">'err'</span>, <span class="string">'\n\nERROR: Highest possible frequency lower than selected frequency band.\n'</span>);
+        <span class="keyword">return</span>
+
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Set Frequency Table
+%%% Usage
+% obj = setFreqTable(obj, newFreqMat) 
+%
+%%% Parameters
+% 
+% * INPUTS: obj, newFreqMat
+%
+% * OUTPUTS: obj
+%
+% The input is newFreqMat which is a powerband matrix to determine
+% the obtain the necessary frequency table and the second optional input 
+% parameter if the function is not self-invoked obj is the RestEegDataClass 
+% object.  The function can be called and passed no input, in which case the default
+% frequency table will be set.  The output, if the function is not 
+% self-invoked, is the original RestEegDataClass object passed in with 
+% the frequency table attribute updated.  
+%
+%%% Copyright and Contact Information
+%
+% Copyright © 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP) 
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% setFreqTable 
+% Prepare frequency table based on user input, if no user input
+% set the default frequency table for later operations such as
+% points retrieval.
+% Before the frequency table is officially assigned, 
+% verification that max frequency is not above nyquist frequency.
+% Returns an error if max above nyquist frequency.
+% The frequency table attribute is assigned for the object to be utilized in
+% further operations such as points retrieval and various analysis methods.
+function obj = setFreqTable( obj, newFreqMat ) 
+
+    if nargin<2
+        newFreqMat = [1,3; 4,7; 8,10; 10,12; 13,30; 30,80]; % human default P2
+%                 newFreqMat = [1,4; 4,10; 10,13; 13,30; 30,55; 65,100]; %
+%                 human modulation index
+%                 newFreqMat = [1,4; 4,8; 8,13; 13,30; 30,55; 65,100]; % mice
+    end
+
+
+
+    EEG = obj.EEG;
+    if newFreqMat(end,2) <= EEG.srate/2
+        obj.freqTable = newFreqMat;
+        obj.msgout('Frequency Table set', 'proc_msg');
+%                 disp(obj.freqTable);
+    else
+        cprintf('err', '\n\nERROR: Highest possible frequency lower than selected frequency band.\n');
+        return
+
+    end
+end
+##### SOURCE END #####
+--></body></html>

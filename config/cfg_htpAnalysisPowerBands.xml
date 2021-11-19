@@ -1,0 +1,25 @@
+<PowOptions>
+	<Study>
+        <Title>Six_Band</Title>
+        <Bands>
+			<Delta>1 3</Delta>
+			<Theta>4 7</Theta>
+			<AlphaLo>8 10</AlphaLo>
+			<AlphaHi>10 12</AlphaHi>
+			<Beta>13 30</Beta>
+			<Gamma>30 80</Gamma>
+		</Bands>
+    </Study>
+		<Study>
+        <Title>Seven_Band_Hi_Gamma</Title>
+        <Bands>
+			<Delta>1 3</Delta>
+			<Theta>4 7</Theta>
+			<AlphaLo>8 10</AlphaLo>
+			<AlphaHi>10 12</AlphaHi>
+			<Beta>13 30</Beta>
+			<GammaLo>30 57</GammaLo>
+			<GammaHi>63 100</GammaHi>
+		</Bands>
+    </Study>
+</PowOptions>

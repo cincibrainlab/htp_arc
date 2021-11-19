@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!-- Use online editor at https://www.tutorialspoint.com/online_xml_editor.htm -->
+<PreProcessOptions>
+    <Stage1>
+        <NetDowngrade>
+            <opt>none</opt>
+            <opt>EGI128->EGI32</opt>
+        </NetDowngrade>
+        <FilterLow>
+            <opt>0.1</opt>
+            <opt>0.3</opt>
+            <opt>0.5</opt>
+            <opt>1</opt>
+            <opt>1.5</opt>
+            <opt>2</opt>
+        </FilterLow>
+        <FilterHigh>
+            <opt>30</opt>
+            <opt>35</opt>
+            <opt>40</opt>
+            <opt>50</opt>
+            <opt>55</opt>
+            <opt>80</opt>
+            <opt>100</opt>
+            <opt>120</opt>
+            <opt>none</opt>
+        </FilterHigh>
+        <Notch1>
+            <opt>57 63</opt>
+	    <opt>cleanline</opt>
+            <opt>none</opt>
+        </Notch1>
+	<Cleanline>
+	    <opt>Disabled</opt>
+	    <opt>Enabled</opt>
+	</Cleanline>
+        <Resample>
+            <opt>250</opt>
+            <opt>500</opt>
+            <opt>100</opt>
+            <opt>128</opt>
+            <opt>1000</opt>
+        </Resample>
+        <Rereference>
+            <opt>Average</opt>
+            <opt>No change</opt>
+        </Rereference>
+        <ParforS1>
+            <opt>1</opt>
+            <opt>0</opt>
+        </ParforS1>
+    </Stage1>
+    <Stage2>
+<MergeFiles>
+<opt>No</opt>
+<opt>Yes</opt>
+</MergeFiles>
+<MergeType>
+<opt>TrimMergeOnly</opt>        
+<opt>TrimStartEnd</opt>
+</MergeType>
+<Interpolation>
+            <opt>Spherical</opt>
+            <opt>invdist</opt>
+            <opt>spacetime</opt>
+        </Interpolation>
+<ChanCleanThreshold>
+<opt>3</opt>
+            <opt>4</opt>
+            <opt>5</opt>
+            <opt>6</opt>
+            <opt>7</opt>
+        </ChanCleanThreshold>
+        <CleanMode>
+            <opt>Manual</opt>
+            <opt>ASR</opt>
+	    <opt>FullAuto</opt>
+            <opt>ContCleanOnly</opt>
+        </CleanMode>
+		<EpochType>
+			<opt>Rest</opt>
+			<opt>Event</opt>
+		</EpochType>
+        <EpochLength>
+            <opt>2</opt>
+            <opt>1</opt>
+            <opt>0.5</opt>
+        </EpochLength>
+		<EpochLimits>
+            <opt>- to + length</opt>
+            <opt>- to 0 length</opt>
+            <opt>0 to + length</opt>
+		</EpochLimits>
+		<EventLimits>
+            		<opt>-500 4000</opt>
+            <opt>-500 800</opt>
+			<opt>-5000 2700</opt>
+			<opt>-400 400</opt>
+            		<opt>-400 700</opt>
+			<opt>-1000 1000</opt>		
+			<opt>-750 3000</opt>	
+		</EventLimits>
+        <LevelBLimits>
+          	<opt>-500 725</opt>
+        <opt>-500 800</opt>
+		<opt>-400 400</opt>
+		<opt>-5300 2000</opt>
+                <opt>-400 4000</opt>
+		<opt>-1000 1000</opt>		
+		<opt>-500 2500</opt>				
+	</LevelBLimits>	
+        <EventRemoveBaseline>
+            <opt>No</opt>
+		    <opt>Yes</opt>
+		</EventRemoveBaseline>			
+		<EventBaseline>
+		<opt>-200 -1</opt>
+		<opt>-500 0</opt>
+		</EventBaseline>	
+    </Stage2>
+    <Stage3>
+        <AlwaysRecalc>
+		<opt>Yes</opt>
+		<opt>No</opt>
+		</AlwaysRecalc>
+		<PCA>
+            <opt>Data Rank</opt>
+            <opt>K-Number</opt>
+            <opt>24</opt>
+            <opt>32</opt>
+            <opt>64</opt>
+        </PCA>
+        <CompSelect>
+            <opt>Manual</opt>
+            <opt>Brain Only</opt>
+            <opt>Muscle Only</opt>
+            <opt>Eye Movement</opt>
+            <opt>Cardiac</opt>
+        </CompSelect>
+        <IcaType>
+            <opt>BINICA</opt>
+            <opt>CUDAICA</opt>
+            <opt>RUNICA</opt>
+            </IcaType>
+		<DipfitCalc>
+		<opt>On</opt>
+		<opt>Off</opt>
+		</DipfitCalc>
+    </Stage3>
+</PreProcessOptions>

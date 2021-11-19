@@ -1,0 +1,410 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Create Results CSV</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-01"><meta name="DC.source" content="createResultsCsv.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Create Results CSV</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">createResultsCsv</a></li></ul></div><h2 id="1">Usage</h2><p>filename = createResultsCsv( obj, sub, stage, varargin )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj, sub, stage, varargin</li></ul></div><div><ul><li>OUTPUTS: filename</li></ul></div><p>The input parameters sub, stage, varargin, and an optional obj if the function is not self-invoked by the object.  The sub input is an object representing the subject, the stage is a string representing the stage (i.e. 'postcomps'), and varargin is a string that defines the state of the subject (i.e. 'Merge' or 'Default' or 'reprocess_').  The optional parameter obj is the htpPreprocessMaster object.  The output is the file name of the results csv for the subject.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright &copy; 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">createResultsCsv</h2><p>Updating the associated stage information and determining correct output location for data file upon completion of preprocessing step. Finalizing the updated paths and data outputted from the completed stage to the associated data files to be used in the next steps of the preprocessing.</p><pre class="codeinput"><span class="keyword">function</span> filename = createResultsCsv( obj, sub, stage, varargin )
+<span class="keyword">if</span> nargin &gt; 2
+    userdesc = genvarname(varargin{1});
+    userdesc = [userdesc <span class="string">'_'</span>];
+<span class="keyword">else</span>
+    userdesc = <span class="string">''</span>;
+<span class="keyword">end</span>
+
+msgout = @sub.msgout;
+<span class="comment">%timetag2    = datestr(now,'yymmddHHMM');</span>
+<span class="keyword">if</span> strcmp(obj.htpcfg.chanNow.net_name,<span class="string">'EDFGENERIC'</span>)
+    timetag2 = datestr(now, <span class="string">'yymmddHHMMSS'</span>);
+<span class="keyword">else</span>
+    timetag2    = datestr(now,<span class="string">'yymmddHHMM'</span>);
+<span class="keyword">end</span>
+
+<span class="keyword">switch</span> stage
+
+    <span class="keyword">case</span> <span class="string">'level1'</span>
+
+        desc = <span class="string">'Stage5'</span>;
+        msg = <span class="string">'FIVE'</span>;
+        outputrowstage = <span class="string">'level1'</span>;
+
+    <span class="keyword">case</span> <span class="string">'preanalysis'</span>
+        desc = <span class="string">'Stage4b'</span>;
+        msg = <span class="string">'FOUR-B'</span>;
+        outputrowstage = <span class="string">'preanalysis'</span>;
+
+    <span class="keyword">case</span> <span class="string">'postcomps'</span>
+
+        desc = <span class="string">'Stage4'</span>;
+        msg = <span class="string">'FOUR'</span>;
+        outputrowstage = <span class="string">'postcomps'</span>;
+
+    <span class="keyword">case</span> <span class="string">'postica'</span>
+
+        desc = <span class="string">'Stage3'</span>;
+        msg = <span class="string">'THREE'</span>;
+        outputrowstage = <span class="string">'postica'</span>;
+
+
+    <span class="keyword">case</span> <span class="string">'preica'</span>
+
+        desc = <span class="string">'Stage2'</span>;
+        msg = <span class="string">'TWO'</span>;
+        outputrowstage = <span class="string">'preica'</span>;
+
+
+    <span class="keyword">case</span> <span class="string">'import'</span>
+
+        desc = <span class="string">'Stage1'</span>;
+        msg = <span class="string">'ONE'</span>;
+        outputrowstage = <span class="string">'import'</span>;
+
+    <span class="keyword">case</span> <span class="string">'combined'</span>
+
+        desc = <span class="string">'Stage3'</span>;
+        msg = <span class="string">'FOUR'</span>;
+        outputrowstage = <span class="string">'postcomps'</span>;
+
+
+
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> strcmp(<span class="string">'same_'</span>, userdesc)
+
+    [a,b,c] = fileparts(obj.htpcfg.csvfile);
+    pathdb = sub(1).pathdb;
+    saveFN = fullfile(pathdb.analysis, b);
+
+
+<span class="keyword">else</span>
+
+    <span class="keyword">if</span> strcmp(<span class="string">'reprocess_'</span>, userdesc)
+        pathdb = sub(1).pathdb;
+        saveFN = [pathdb.analysis <span class="string">'A'</span> timetag2 <span class="string">'_subjTable_'</span> userdesc desc <span class="string">'_AUTO'</span>];
+        <span class="comment">%</span>
+        <span class="comment">%                     [a,b,c] = fileparts(obj.htpcfg.csvfile);</span>
+        <span class="comment">%                     b = [b '_AUTO'];</span>
+        <span class="comment">%                     obj.htpcfg.csvfile = [a, b, c];</span>
+        <span class="comment">%                     pathdb = sub(1).pathdb;</span>
+        <span class="comment">%                     saveFN = fullfile(pathdb.analysis, b);</span>
+        <span class="comment">%</span>
+
+    <span class="keyword">else</span>
+
+        pathdb = sub(1).pathdb;
+        saveFN = [pathdb.analysis <span class="string">'A'</span> timetag2 <span class="string">'_subjTable_'</span> userdesc desc];
+         saveFN = [pathdb.analysis <span class="string">'A'</span> timetag2 <span class="string">'_subjTable_'</span> userdesc desc];
+
+
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+subjHeader = regexprep(sub(1).log_subjHeader, <span class="string">'\.'</span>, <span class="string">''</span>) ;
+
+
+<span class="comment">%             for i = 1 : length(sub)</span>
+<span class="comment">%                 %sub(i).outputRow(outputrowstage);</span>
+<span class="comment">%                 subjTable(i,:) = cell2table(vertcat(sub(i).log_subjRow));</span>
+<span class="comment">%             end</span>
+tcell = {sub.log_subjRow};
+
+<span class="keyword">for</span> k = 1 : length(tcell)
+
+    maxSize = max(cellfun(@numel, tcell));               <span class="comment">% Get the maximum vector size</span>
+    <span class="keyword">if</span> size(tcell{k},2) &lt; maxSize
+
+        tcell{k} = [tcell{k} cell(1, maxSize-numel(tcell{k}))];
+
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+vertcat(tcell);
+
+subjTable = cell2table(vertcat(tcell{:}));
+
+maxSize = max(cellfun(@numel, {sub.log_subjHeader}));
+headsizes = cellfun(@(x) size(x,2), {sub.log_subjHeader},<span class="string">'uni'</span>,0);
+headsizes = cell2mat(headsizes);
+bestsize = find(headsizes == maxSize);
+
+subjTable.Properties.VariableNames = sub(bestsize(1)).log_subjHeader;
+
+csvfile = fullfile([saveFN <span class="string">'.csv'</span>]);
+<span class="keyword">try</span>
+    writetable(subjTable, csvfile );
+<span class="keyword">catch</span>
+    obj.msgout(sprintf(<span class="string">'If writetable error, type ''which strjoin'' to check for conflict.\nMove MATLAB libraries to top of the path.'</span>), <span class="string">'step_error'</span>);
+<span class="keyword">end</span>
+<span class="comment">%objSaveFile = fullfile([saveFN '.mat']);</span>
+objSaveFile = fullfile([saveFN <span class="string">'.mat'</span>]);
+obj.htpcfg.csvfile = csvfile;
+arrayfun(@( s ) s.unloadDataset, sub, <span class="string">'UniformOutput'</span>,false );
+arrayfun(@( s ) s.setCsv( csvfile ), sub, <span class="string">'UniformOutput'</span>,false );
+arrayfun(@( s ) s.setMat( objSaveFile ), sub, <span class="string">'UniformOutput'</span>,false );
+arrayfun(@( s ) obj.update_htpcfg( s ), sub, <span class="string">'UniformOutput'</span>,false );
+
+filename = objSaveFile;
+obj.htpcfg.fullauto.csvfile = csvfile;
+obj.htpcfg.fullauto.matfile = objSaveFile;
+
+save(objSaveFile, <span class="string">'sub'</span>,<span class="string">'-v7.3'</span>);
+
+obj.msgout(sprintf(<span class="string">'\nSTAGE %s COMPLETE\n'</span>, msg), <span class="string">'step_complete'</span>);
+obj.msgout(sprintf(<span class="string">'\nTable of Results:\n%s\n'</span>, csvfile), <span class="string">'step_complete'</span>);
+obj.msgout(sprintf(<span class="string">'\nFile of Data Objects:\n%s\n\n'</span>,objSaveFile), <span class="string">'step_complete'</span>);
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Create Results CSV
+%%% Usage
+% 
+% filename = createResultsCsv( obj, sub, stage, varargin )
+%
+%%% Parameters
+%
+% * INPUTS: obj, sub, stage, varargin
+%
+% * OUTPUTS: filename
+%
+% The input parameters sub, stage, varargin, and an optional obj if the 
+% function is not self-invoked by the object.  The sub input is an object
+% representing the subject, the stage is a string representing the stage
+% (i.e. 'postcomps'), and varargin is a string that defines the state of
+% the subject (i.e. 'Merge' or 'Default' or 'reprocess_').  The optional 
+% parameter obj is the htpPreprocessMaster object.  The output is 
+% the file name of the results csv for the subject.
+%
+%%% Copyright and Contact Information
+% Copyright © 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+%
+% Contact: ernest.pedapati@cchmc.org
+
+%% createResultsCsv
+% Updating the associated stage information and determining correct output
+% location for data file upon completion of preprocessing step.
+% Finalizing the updated paths and data outputted from the completed stage to
+% the associated data files to be used in the next steps of the
+% preprocessing.
+
+function filename = createResultsCsv( obj, sub, stage, varargin )
+if nargin > 2
+    userdesc = genvarname(varargin{1});
+    userdesc = [userdesc '_'];
+else
+    userdesc = '';
+end
+
+msgout = @sub.msgout;
+%timetag2    = datestr(now,'yymmddHHMM');
+if strcmp(obj.htpcfg.chanNow.net_name,'EDFGENERIC')
+    timetag2 = datestr(now, 'yymmddHHMMSS');
+else
+    timetag2    = datestr(now,'yymmddHHMM');
+end
+
+switch stage
+    
+    case 'level1'
+        
+        desc = 'Stage5';
+        msg = 'FIVE';
+        outputrowstage = 'level1';
+        
+    case 'preanalysis'
+        desc = 'Stage4b';
+        msg = 'FOUR-B';
+        outputrowstage = 'preanalysis';
+        
+    case 'postcomps'
+        
+        desc = 'Stage4';
+        msg = 'FOUR';
+        outputrowstage = 'postcomps';
+        
+    case 'postica'
+        
+        desc = 'Stage3';
+        msg = 'THREE';
+        outputrowstage = 'postica';
+        
+        
+    case 'preica'
+        
+        desc = 'Stage2';
+        msg = 'TWO';
+        outputrowstage = 'preica';
+        
+        
+    case 'import'
+        
+        desc = 'Stage1';
+        msg = 'ONE';
+        outputrowstage = 'import';
+        
+    case 'combined'
+        
+        desc = 'Stage3';
+        msg = 'FOUR';
+        outputrowstage = 'postcomps';
+        
+        
+        
+end
+
+if strcmp('same_', userdesc)
+    
+    [a,b,c] = fileparts(obj.htpcfg.csvfile);
+    pathdb = sub(1).pathdb;
+    saveFN = fullfile(pathdb.analysis, b);
+    
+    
+else
+    
+    if strcmp('reprocess_', userdesc)
+        pathdb = sub(1).pathdb;
+        saveFN = [pathdb.analysis 'A' timetag2 '_subjTable_' userdesc desc '_AUTO'];
+        %
+        %                     [a,b,c] = fileparts(obj.htpcfg.csvfile);
+        %                     b = [b '_AUTO'];
+        %                     obj.htpcfg.csvfile = [a, b, c];
+        %                     pathdb = sub(1).pathdb;
+        %                     saveFN = fullfile(pathdb.analysis, b);
+        %
+        
+    else
+        
+        pathdb = sub(1).pathdb;
+        saveFN = [pathdb.analysis 'A' timetag2 '_subjTable_' userdesc desc];
+         saveFN = [pathdb.analysis 'A' timetag2 '_subjTable_' userdesc desc];
+
+        
+    end
+end
+
+
+subjHeader = regexprep(sub(1).log_subjHeader, '\.', '') ;
+
+
+%             for i = 1 : length(sub)
+%                 %sub(i).outputRow(outputrowstage);
+%                 subjTable(i,:) = cell2table(vertcat(sub(i).log_subjRow));
+%             end
+tcell = {sub.log_subjRow};
+
+for k = 1 : length(tcell)
+    
+    maxSize = max(cellfun(@numel, tcell));               % Get the maximum vector size
+    if size(tcell{k},2) < maxSize
+        
+        tcell{k} = [tcell{k} cell(1, maxSize-numel(tcell{k}))];
+        
+    end
+end
+
+vertcat(tcell);
+
+subjTable = cell2table(vertcat(tcell{:}));
+
+maxSize = max(cellfun(@numel, {sub.log_subjHeader}));
+headsizes = cellfun(@(x) size(x,2), {sub.log_subjHeader},'uni',0);
+headsizes = cell2mat(headsizes);
+bestsize = find(headsizes == maxSize);
+
+subjTable.Properties.VariableNames = sub(bestsize(1)).log_subjHeader;
+
+csvfile = fullfile([saveFN '.csv']);
+try
+    writetable(subjTable, csvfile );
+catch
+    obj.msgout(sprintf('If writetable error, type ''which strjoin'' to check for conflict.\nMove MATLAB libraries to top of the path.'), 'step_error');
+end
+%objSaveFile = fullfile([saveFN '.mat']);
+objSaveFile = fullfile([saveFN '.mat']);
+obj.htpcfg.csvfile = csvfile;
+arrayfun(@( s ) s.unloadDataset, sub, 'UniformOutput',false );
+arrayfun(@( s ) s.setCsv( csvfile ), sub, 'UniformOutput',false );
+arrayfun(@( s ) s.setMat( objSaveFile ), sub, 'UniformOutput',false );
+arrayfun(@( s ) obj.update_htpcfg( s ), sub, 'UniformOutput',false );
+
+filename = objSaveFile;
+obj.htpcfg.fullauto.csvfile = csvfile;
+obj.htpcfg.fullauto.matfile = objSaveFile;
+
+save(objSaveFile, 'sub','-v7.3');
+
+obj.msgout(sprintf('\nSTAGE %s COMPLETE\n', msg), 'step_complete');
+obj.msgout(sprintf('\nTable of Results:\n%s\n', csvfile), 'step_complete');
+obj.msgout(sprintf('\nFile of Data Objects:\n%s\n\n',objSaveFile), 'step_complete');
+
+end
+
+##### SOURCE END #####
+--></body></html>

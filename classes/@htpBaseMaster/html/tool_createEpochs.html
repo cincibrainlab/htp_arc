@@ -1,0 +1,183 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Tool to Create Epochs</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-01"><meta name="DC.source" content="tool_createEpochs.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Tool to Create Epochs</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">tool_createEpochs</a></li></ul></div><h2 id="1">Usage</h2><p>s = tool_createEpochs( obj, s )</p><h2 id="2">Parameters</h2><p>The input parameter s is a subject object (RestEegDataClass object) and the second optional input paramter if the function is self-invoked obj is the htpPreprocessMaster object.  The output is the subject object with the newly created epochs stored in the EEG_preica struct of the updated output.</p><p>Copyright (C) 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="3">tool_createEpochs</h2><p>Utilized to create the epochs for the EEG data. Length and limits are configured, and once configuration is done, epoch creation proceeds and the creation process depends on if the data is rest data or event related data with the epochs being outputted into the EEG_preica struct.  The epochs are created to be used throughout the future preprocessing steps to allow for accurate processing and component analysis.</p><pre class="codeinput"><span class="keyword">function</span> s = tool_createEpochs( obj, s )
+
+opt     = obj.formatOptions;
+
+s.proc_contEpochLength = opt.epoch_length;
+s.proc_contEpochLimits = opt.epoch_limits;
+
+<span class="keyword">switch</span> opt.epoch_type
+
+    <span class="keyword">case</span> <span class="string">'Rest'</span>
+        s.createEpochs;
+    <span class="keyword">case</span> <span class="string">'Event'</span>
+        s.createEpochsERP
+<span class="keyword">end</span>
+
+
+<span class="comment">% see snagit picture</span>
+<span class="comment">% time window of interest is t = 0 is the user response</span>
+<span class="comment">% or the maximum 2000 ms, always 600 ms afterwards</span>
+<span class="comment">% ERP window: -1000 + 1000 of trigger 9 (positive), 10 (no press), 11</span>
+<span class="comment">% (reversal)</span>
+<span class="comment">% bands: theta, alpha ( &lt; 30 hz filter) keep background gamma</span>
+<span class="comment">% run it both ways with or without high pass</span>
+<span class="comment">% amplitude measures and latency of P300 P3A, P3B</span>
+<span class="comment">% N100 data</span>
+<span class="comment">% leads: 68 and regions, Fz (11, 12, 5,6) Cz (6, 7,107, 129), Pz</span>
+<span class="comment">% (62,61,70,67,73,78,68)</span>
+
+<span class="comment">% datasets: see onedrive link</span>
+
+<span class="comment">% DIN11 - DIN9 amplitude / latency</span>
+<span class="comment">% table</span>
+<span class="comment">% time frequency / amplitude</span>
+<span class="comment">% rows: FXS, CONTROL</span>
+<span class="comment">% columns: feedback column reversal (negative) versus non-reversal</span>
+<span class="comment">% (positive) within that you amplitudes, latencies</span>
+
+<span class="comment">% blinded epochs</span>
+<span class="comment">% all epochs look the same</span>
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Tool to Create Epochs
+%%% Usage
+%    
+% s = tool_createEpochs( obj, s )
+%
+%%% Parameters
+%
+% The input parameter s is a subject object (RestEegDataClass object) and
+% the second optional input paramter if the function is self-invoked obj is 
+% the htpPreprocessMaster object.  The output is the subject object with 
+% the newly created epochs stored in the EEG_preica struct of the updated 
+% output. 
+%
+% Copyright (C) 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% tool_createEpochs
+% Utilized to create the epochs for the EEG data.
+% Length and limits are configured, and once configuration is done, epoch 
+% creation proceeds and the creation process depends on if the data 
+% is rest data or event related data with the epochs being outputted into 
+% the EEG_preica struct.  The epochs are created to be used 
+% throughout the future preprocessing steps to allow for accurate processing
+% and component analysis.
+function s = tool_createEpochs( obj, s )
+
+opt     = obj.formatOptions;
+
+s.proc_contEpochLength = opt.epoch_length;
+s.proc_contEpochLimits = opt.epoch_limits;
+
+switch opt.epoch_type
+    
+    case 'Rest'
+        s.createEpochs;
+    case 'Event'  
+        s.createEpochsERP
+end
+
+
+% see snagit picture
+% time window of interest is t = 0 is the user response
+% or the maximum 2000 ms, always 600 ms afterwards
+% ERP window: -1000 + 1000 of trigger 9 (positive), 10 (no press), 11
+% (reversal)
+% bands: theta, alpha ( < 30 hz filter) keep background gamma
+% run it both ways with or without high pass
+% amplitude measures and latency of P300 P3A, P3B
+% N100 data
+% leads: 68 and regions, Fz (11, 12, 5,6) Cz (6, 7,107, 129), Pz
+% (62,61,70,67,73,78,68)
+
+% datasets: see onedrive link
+
+% DIN11 - DIN9 amplitude / latency
+% table
+% time frequency / amplitude
+% rows: FXS, CONTROL
+% columns: feedback column reversal (negative) versus non-reversal
+% (positive) within that you amplitudes, latencies
+
+% blinded epochs
+% all epochs look the same
+
+end
+##### SOURCE END #####
+--></body></html>

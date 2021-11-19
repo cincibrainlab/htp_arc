@@ -1,0 +1,252 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Preprocess Optional</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-01"><meta name="DC.source" content="preprocess_optional.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Preprocess Optional</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">preprocess_optional</a></li><li><a href="#5">disp_welcome</a></li></ul></div><h2 id="1">Usage</h2><p>obj = preprocess_optional( obj, action )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj, action</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><p>The input parameter action is the plotting action to be taken for the user to utilize in the manual review process and the second optional parameter if the function is not self-invoked obj is the htpPreprocessMaster object.  The output, if the function is not self-invoked, is the htpPreprocessMaster that invoked the function or was passed in as the first input since the images generated themselves will be displayed to the user.</p><h2 id="3">Copyright and Contact Information</h2><p>Copyright (C) 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">preprocess_optional</h2><p>Perform post-ica artifact detection via loading each subject from the stage and setting up options for subject and prepopulated status to perform the necessary manual reviewal. Finally, produce the figures for the user to review and the generation of images is based upon the action dictating the method for manual review the user seeks to perform.</p><pre class="codeinput"><span class="keyword">function</span> obj = preprocess_optional( obj, action )
+
+stage_last = <span class="string">'postcomps'</span>;
+stage_next = <span class="string">'level1'</span>;
+
+<span class="comment">% init</span>
+[mc, mm, mw] = obj.tools_log;
+opt     = obj.formatOptions;
+
+
+dipfitcalc = opt.dipfitcalc;
+
+disp_welcome(mm);
+
+
+obj.sub = obj.loadSub( stage_last );
+
+arrayfun(@( s ) s.setopt( opt ), obj.sub, <span class="string">'uni'</span>, 0);
+
+objStageStatus              = obj.htpcfg.objStageStatus;
+objStageStatus_completed    = obj.htpcfg.objStageStatus_completed;
+
+prev_files = 0; skip_files = 0; errorchk = 0; uniquei = 1; flg = 0;
+
+
+sub = obj.sub;
+
+<span class="keyword">for</span> i = 1 : length(sub)
+    s = sub(i);
+
+    <span class="keyword">if</span> s.exclude_switch
+        s.exclude_status = randi([1 4]);
+    <span class="keyword">else</span>
+        s.exclude_status = randi([1 4]);
+    <span class="keyword">end</span>
+
+    s.mra.filename.spectfig = obj.create_filename_spectfig(s);
+
+    s.mra.reviewed = false;
+
+    <span class="keyword">if</span> ismember(i, objStageStatus)
+
+        <span class="keyword">switch</span> action
+
+            <span class="keyword">case</span> <span class="string">'spectSeriesPlot'</span>
+
+                <span class="comment">%     obj.spectSeriesPlot( s );</span>
+
+            <span class="keyword">otherwise</span>
+
+        <span class="keyword">end</span>
+
+
+    <span class="keyword">end</span>
+
+    sub(i) = s;
+<span class="keyword">end</span>
+
+obj.sub = sub;
+
+obj.createResultsCsv(obj.sub, <span class="string">'postcomps'</span>, <span class="string">'mra'</span>);
+
+<span class="comment">%  [csvfile, matfile] = o.createCsvFileName;</span>
+
+mm( sprintf(<span class="string">'CSV &amp; mat file: %s\n'</span>, obj.htpcfg.csvfile));
+
+<span class="keyword">end</span>
+</pre><h2 id="5">disp_welcome</h2><p>Displays message to user via GUI output console and command console that stage 4 optional preprocessing has begun</p><pre class="codeinput"><span class="keyword">function</span> disp_welcome(mm)
+mm(<span class="string">'Starting Stage 4: Optional Functions'</span>);
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Preprocess Optional
+%
+%%% Usage
+%    
+% obj = preprocess_optional( obj, action )
+%
+%%% Parameters
+%
+% * INPUTS: obj, action
+%
+% * OUTPUTS: obj
+%
+% The input parameter action is the plotting action to be taken
+% for the user to utilize in the manual review process and the second 
+% optional parameter if the function is not self-invoked obj is the 
+% htpPreprocessMaster object.  The output, if the function is not 
+% self-invoked, is the htpPreprocessMaster that invoked the function or 
+% was passed in as the first input since the images generated themselves will be 
+% displayed to the user.
+% 
+%%% Copyright and Contact Information
+%
+% Copyright (C) 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% preprocess_optional
+% Perform post-ica artifact detection via loading each subject from the stage
+% and setting up options for subject and prepopulated status 
+% to perform the necessary manual reviewal. Finally, produce the
+% figures for the user to review and the generation of images is based upon
+% the action dictating the method for manual review the user seeks to perform.
+function obj = preprocess_optional( obj, action )
+
+stage_last = 'postcomps';
+stage_next = 'level1';
+
+% init
+[mc, mm, mw] = obj.tools_log;       
+opt     = obj.formatOptions;        
+
+
+dipfitcalc = opt.dipfitcalc;
+
+disp_welcome(mm);
+
+
+obj.sub = obj.loadSub( stage_last );  
+
+arrayfun(@( s ) s.setopt( opt ), obj.sub, 'uni', 0);  
+
+objStageStatus              = obj.htpcfg.objStageStatus;
+objStageStatus_completed    = obj.htpcfg.objStageStatus_completed;
+
+prev_files = 0; skip_files = 0; errorchk = 0; uniquei = 1; flg = 0;
+
+
+sub = obj.sub;
+
+for i = 1 : length(sub)
+    s = sub(i);
+    
+    if s.exclude_switch
+        s.exclude_status = randi([1 4]);
+    else
+        s.exclude_status = randi([1 4]);
+    end
+    
+    s.mra.filename.spectfig = obj.create_filename_spectfig(s);
+    
+    s.mra.reviewed = false;
+    
+    if ismember(i, objStageStatus)
+        
+        switch action
+            
+            case 'spectSeriesPlot'
+                
+                %     obj.spectSeriesPlot( s );
+                
+            otherwise
+                
+        end
+        
+        
+    end
+    
+    sub(i) = s;
+end
+
+obj.sub = sub;
+
+obj.createResultsCsv(obj.sub, 'postcomps', 'mra');
+
+%  [csvfile, matfile] = o.createCsvFileName;
+
+mm( sprintf('CSV & mat file: %s\n', obj.htpcfg.csvfile));
+
+end
+
+%% disp_welcome
+% Displays message to user via GUI output console and command console that
+% stage 4 optional preprocessing has begun
+function disp_welcome(mm)
+mm('Starting Stage 4: Optional Functions');
+end
+##### SOURCE END #####
+--></body></html>

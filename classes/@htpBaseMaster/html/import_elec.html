@@ -1,0 +1,273 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Import Electrode Configuration</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-01"><meta name="DC.source" content="import_elec.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Import Electrode Configuration</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage</a></li><li><a href="#2">Parameters</a></li><li><a href="#3">Copyright and Contact Information</a></li><li><a href="#4">import_elec</a></li></ul></div><h2 id="1">Usage</h2><p>obj = import_elec( obj, xmlfile )</p><h2 id="2">Parameters</h2><div><ul><li>INPUTS: obj, xmlfile</li></ul></div><div><ul><li>OUTPUTS: obj</li></ul></div><pre>The input parameter xmlfile is an xml configuration file with EEG
+system configuration options.  The obj parameter, optional if the
+function is not self-invoked, is an htpPreprocessMaster object.  The
+output, if the function is not self-invoked, is the
+htpPreprocessMaster object with the electrode configuration options set.</pre><p>arguments   filename  xml file with the format <a href="item">item</a> <a href="listitem">listitem</a>     <a href="net_displayname">net_displayname</a>'EGI Hydrocel 128'&lt;/net_displayname&gt;     <a href="net_name">net_name</a>'EGI128'&lt;/net_name&gt;     <a href="net_file">net_file</a>'chanfiles/GSN-HydroCel-129.sfp'&lt;/net_file&gt;     <a href="net_graphic">net_graphic</a>'chanfiles/EEG_128_channel_array_map.pdf'&lt;/net_graphic&gt;     <a href="net_filter">net_filter</a>'*.raw'&lt;/net_filter&gt;     <a href="net_nochans&gt;128</net_nochans">net_nochans&gt;128&lt;/net_nochans</a>     <a href="net_regions">net_regions</a>         <a href="Frontal">Frontal</a>'[1,2,3,4,8,9,10,11,15,16,18,19,20,23,24,26,27,33,125,128]'&lt;/Frontal&gt;         <a href="Premotor">Premotor</a>'[21,30,36,29,40,35,25,28,34,39,119,124,112,123,118,122,117,116,121]'&lt;/Premotor&gt;         <a href="SMA">SMA</a>'[5,6,12,13,21,119,113]'&lt;/SMA&gt;         <a href="Motor">Motor</a>'[36,41,37,42,38,32,7,107,106,105,104,111,110,81,88,]&lt;/Motor&gt;         <a href="Somatosensory">Somatosensory</a>'[32,38,43,48,42,46,47,54,55,80,81,88,94,99,104,103]'&lt;/Somatosensory&gt;         <a href="Parietal">Parietal</a>'[51,52,53,54,57,58,59,60,61,62,66,67,68,72,73,77,78,79,80,85,86,87]'&lt;/Parietal&gt;         <a href="Occipital">Occipital</a>'[65,66,72,73,77,85,91,69,70,71,76,84,90,75,83]'&lt;/Occipital&gt;     <a href="/net_regions">/net_regions</a> <a href="/listitem">/listitem</a> <a href="/item">/item</a></p><h2 id="3">Copyright and Contact Information</h2><p>Copyright &copy; 2020  Cincinnati Children's (Pedapati Lab)</p><p>This file is part of High Throughput Pipeline (HTP)</p><p>See https://bitbucket.org/eped1745/htp_stable/src/master/</p><p>Contact: <a href="mailto:ernest.pedapati@cchmc.org">ernest.pedapati@cchmc.org</a></p><h2 id="4">import_elec</h2><p>Import the electrode configuration options and details, via array creation of electrodeConfigClass objects from xml configuration file config/cfg_htpEegSystems.xml, due to the information being crucial for preprocessing as it provides fields such as net parameters for the input data that will guide most of the pipeline processing. The user is alerted in the case of an error since most of the issues are due to improperly formatted xml configuration files.</p><pre class="codeinput"><span class="keyword">function</span> obj = import_elec( obj, xmlfile )
+
+<span class="keyword">if</span> nargin &lt; 2
+    xmlfile = <span class="string">'config/cfg_htpEegSystems.xml'</span>;
+    <span class="comment">%obj.msgout('Electrode Import from config/cfg_htpEegSystems.xml', 'step_complete');</span>
+<span class="keyword">end</span>
+
+obj.msgout(sprintf(<span class="string">'Electrode Import from %s'</span>, xmlfile), <span class="string">'step_complete'</span>);
+outStr =<span class="string">''</span>;
+
+<span class="keyword">try</span>
+    cfgFilename = xmlfile;
+
+    xmldata = ext_xml2struct( cfgFilename );
+
+    eegList = xmldata.list;
+    eegList = {eegList.listitem{:}};
+
+    <span class="keyword">for</span> i = 1 : length( eegList )
+
+        eegItem(i) = eegList{i};
+
+        fn = fieldnames(eegItem(i));
+
+        <span class="keyword">for</span> k=1 : numel(fn)
+
+            <span class="keyword">if</span> isfield(eegItem(i).(fn{k}), <span class="string">'Text'</span>) == 1
+
+                eegItem(i).(fn{k})  = eegItem(i).(fn{k}).Text;
+
+
+            <span class="keyword">else</span>
+
+                <span class="keyword">if</span> strcmp(fn{k}, <span class="string">'net_regions'</span>)
+
+                    regions = fieldnames(eegItem(i).(fn{k}));
+
+                    <span class="keyword">for</span> l = 1 : numel( regions )
+
+                        eegItem(i).(fn{k}).(regions{l}) = cellfun(@str2double,regexp(eegItem(i).(fn{k}).(regions{l}).Text,<span class="string">'\d*'</span>,<span class="string">'Match'</span>));
+
+                    <span class="keyword">end</span>
+
+                <span class="keyword">end</span>
+
+            <span class="keyword">end</span>
+
+        <span class="keyword">end</span>
+
+
+        elecObj(i) = electrodeConfigClass;
+        elecObj(i).setSystemProperties( eegItem(i) );
+
+        str = sprintf(<span class="string">'\tLoaded(%d): %s\n'</span>, i, elecObj(i).net_displayname);
+        outStr = sprintf(<span class="string">'%s\n%s'</span>, outStr, str);
+
+        obj.xml_elec = elecObj;
+
+    <span class="keyword">end</span>
+
+    outStr = sprintf(<span class="string">'%s\n%s'</span>, outStr, <span class="string">'htp_readEegSystem.m: Success with Electrode Import\n\n'</span>);
+    notify(obj, <span class="string">'step_complete'</span>);
+    obj.htpcfg.chaninfo = obj.xml_elec;
+<span class="keyword">catch</span>
+
+    outStr = sprintf(<span class="string">'%s\n%s'</span>, outStr, <span class="string">'htp_readEegSystem.m: ERROR: Check format of config/cfg_htpEegSystems.xmlxt\n\n'</span>);
+    obj.msgout(outStr, <span class="string">'step_error'</span>);
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Import Electrode Configuration
+%%% Usage
+%    
+% obj = import_elec( obj, xmlfile )
+%
+%%% Parameters
+%
+% * INPUTS: obj, xmlfile
+%
+% * OUTPUTS: obj
+%
+%  The input parameter xmlfile is an xml configuration file with EEG
+%  system configuration options.  The obj parameter, optional if the 
+%  function is not self-invoked, is an htpPreprocessMaster object.  The 
+%  output, if the function is not self-invoked, is the 
+%  htpPreprocessMaster object with the electrode configuration options set.  
+%    
+% arguments
+%   filename  xml file with the format
+% <item>
+% <listitem>
+%     <net_displayname>'EGI Hydrocel 128'</net_displayname>
+%     <net_name>'EGI128'</net_name>
+%     <net_file>'chanfiles/GSN-HydroCel-129.sfp'</net_file>
+%     <net_graphic>'chanfiles/EEG_128_channel_array_map.pdf'</net_graphic>
+%     <net_filter>'*.raw'</net_filter>
+%     <net_nochans>128</net_nochans>
+%     <net_regions>
+%         <Frontal>'[1,2,3,4,8,9,10,11,15,16,18,19,20,23,24,26,27,33,125,128]'</Frontal>
+%         <Premotor>'[21,30,36,29,40,35,25,28,34,39,119,124,112,123,118,122,117,116,121]'</Premotor>
+%         <SMA>'[5,6,12,13,21,119,113]'</SMA>
+%         <Motor>'[36,41,37,42,38,32,7,107,106,105,104,111,110,81,88,]</Motor>
+%         <Somatosensory>'[32,38,43,48,42,46,47,54,55,80,81,88,94,99,104,103]'</Somatosensory>
+%         <Parietal>'[51,52,53,54,57,58,59,60,61,62,66,67,68,72,73,77,78,79,80,85,86,87]'</Parietal>
+%         <Occipital>'[65,66,72,73,77,85,91,69,70,71,76,84,90,75,83]'</Occipital>
+%     </net_regions>
+% </listitem>
+% </item>
+%
+%%% Copyright and Contact Information
+%
+% Copyright © 2020  Cincinnati Children's (Pedapati Lab)
+%
+% This file is part of High Throughput Pipeline (HTP)
+% 
+% See https://bitbucket.org/eped1745/htp_stable/src/master/
+% 
+% Contact: ernest.pedapati@cchmc.org
+
+%% import_elec
+% Import the electrode configuration options and details, via array creation
+% of electrodeConfigClass objects from xml configuration file 
+% config/cfg_htpEegSystems.xml, due to 
+% the information being crucial for preprocessing as it provides 
+% fields such as net parameters for the input data
+% that will guide most of the pipeline processing. 
+% The user is alerted in the case of an error since most of the issues
+% are due to improperly formatted xml configuration files.
+
+function obj = import_elec( obj, xmlfile )
+
+if nargin < 2
+    xmlfile = 'config/cfg_htpEegSystems.xml';
+    %obj.msgout('Electrode Import from config/cfg_htpEegSystems.xml', 'step_complete');
+end
+
+obj.msgout(sprintf('Electrode Import from %s', xmlfile), 'step_complete');
+outStr ='';
+
+try
+    cfgFilename = xmlfile;
+    
+    xmldata = ext_xml2struct( cfgFilename );
+    
+    eegList = xmldata.list;
+    eegList = {eegList.listitem{:}};
+    
+    for i = 1 : length( eegList )
+        
+        eegItem(i) = eegList{i};
+        
+        fn = fieldnames(eegItem(i));
+        
+        for k=1 : numel(fn)
+            
+            if isfield(eegItem(i).(fn{k}), 'Text') == 1
+                
+                eegItem(i).(fn{k})  = eegItem(i).(fn{k}).Text;
+                
+                
+            else
+                
+                if strcmp(fn{k}, 'net_regions')
+                    
+                    regions = fieldnames(eegItem(i).(fn{k}));
+                    
+                    for l = 1 : numel( regions )
+                        
+                        eegItem(i).(fn{k}).(regions{l}) = cellfun(@str2double,regexp(eegItem(i).(fn{k}).(regions{l}).Text,'\d*','Match'));
+                        
+                    end
+                    
+                end            
+                
+            end
+            
+        end
+        
+        
+        elecObj(i) = electrodeConfigClass;
+        elecObj(i).setSystemProperties( eegItem(i) );
+        
+        str = sprintf('\tLoaded(%d): %s\n', i, elecObj(i).net_displayname);
+        outStr = sprintf('%s\n%s', outStr, str);        
+
+        obj.xml_elec = elecObj;
+        
+    end
+    
+    outStr = sprintf('%s\n%s', outStr, 'htp_readEegSystem.m: Success with Electrode Import\n\n');
+    notify(obj, 'step_complete');
+    obj.htpcfg.chaninfo = obj.xml_elec;
+catch
+    
+    outStr = sprintf('%s\n%s', outStr, 'htp_readEegSystem.m: ERROR: Check format of config/cfg_htpEegSystems.xmlxt\n\n');
+    obj.msgout(outStr, 'step_error');    
+    
+end
+##### SOURCE END #####
+--></body></html>
