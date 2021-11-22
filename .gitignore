@@ -34,4 +34,4 @@ octave-workspace
 **/local/*.mat
 
 # Log files in the logfiles subdirectory of local
-**/local/logfiles/
+**/local/logfiles/*.txt
